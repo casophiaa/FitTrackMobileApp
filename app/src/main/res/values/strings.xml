@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">FitTrackMobile App</string>
+    <string name="a_desc">Baked goods are foods made from dough or batter and cooked by baking, a method of cooking food that uses prolonged dry heat, normally in an oven, but also in hot ashes, or on hot stones</string>
+    <string name="b_desc">Grilling involves cooking food on a rack over a heat source, usually a charcoal fire or ceramic briquettes heated by gas flames. Direct heat quickly sears the outside of food, producing distinctive robust, roasted―and sometimes pleasantly charred―flavors and a nice crust.</string>
+    <string name="c_desc">A dessert is a type of food that is eaten after lunch or dinner, and sometimes after a light meal or snack. It is usually a sweet food, like ice cream, cookies, and cakes. In some countries, cheeses such as Brie cheese and fruit are served as dessert. Some desserts are decorated, like birthday cakes.</string>
+    <string name="d_desc">Italian cuisine is a Mediterranean cuisine consisting of the ingredients, recipes and cooking techniques developed across the Italian Peninsula since antiquity, and later spread around the world together with waves of Italian diaspora</string>
+    <string name="e_desc">A milkshake (sometimes called a shake in the United States) is a sweet drink made by blending milk, ice cream, and flavorings or sweeteners such as butterscotch, caramel sauce, chocolate syrup, fruit syrup, or whole fruit into a thick, sweet, cold mixture.</string>
+
 </resources>
