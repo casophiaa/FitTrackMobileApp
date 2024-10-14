@@ -14,7 +14,8 @@ public class ViewPager extends AppCompatActivity {
 
     ViewPager2 viewPager2;
     ArrayList<ViewPagerItem> viewPagerItemArrayList;
-    Button nextButton;
+    Button loginButton;
+    Button signUpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,9 @@ public class ViewPager extends AppCompatActivity {
         setContentView(R.layout.activity_view_pager);
 
         viewPager2 = findViewById(R.id.viewpager);
-        nextButton = findViewById(R.id.button2); // Find the button
+        loginButton = findViewById(R.id.button2);
+        signUpButton = findViewById(R.id.button3);
+
 
         int[] images = {R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e};
         String[] heading = {"Personalized Fitness Tracking", "Capture and Visualize Progress", "Custom Workouts and Reminders", "Find Nearby Gyms and Parks", "Log Your Activities"};
@@ -56,14 +59,25 @@ public class ViewPager extends AppCompatActivity {
                 // Check if we are on the last page
                 if (position == viewPagerItemArrayList.size() - 1) {
                     // Show the Next button on the last page
-                    nextButton.setVisibility(View.VISIBLE);
+                    loginButton.setVisibility(View.VISIBLE);
+                    signUpButton.setVisibility(View.VISIBLE);
                 } else {
                     // Hide the Next button on all other pages
-                    nextButton.setVisibility(View.GONE);
+                    loginButton.setVisibility(View.GONE);
+                    signUpButton.setVisibility(View.GONE);
                 }
             }
         });
-        nextButton.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Intent to navigate to the dashboard
+                Intent intent = new Intent(ViewPager.this, Dashboard.class);
+                startActivity(intent);
+                finish(); // Optional: if you want to close the ViewPager activity
+            }
+        });
+        signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Intent to navigate to the dashboard
