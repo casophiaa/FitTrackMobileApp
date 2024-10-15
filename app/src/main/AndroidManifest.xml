@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,6 +15,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FitTrackMobileApp"
         tools:targetApi="31">
+        <activity
+            android:name=".Yoga"
+            android:exported="false" />
+        <activity
+            android:name=".ExerciseItem"
+            android:exported="false" />
+        <activity
+            android:name=".ExerciseAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".ExerciseWithMe"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyD6uXxtELTLoRlaR_SQbVa-1szuLOTCCd4" />
+
+        <activity
+            android:name=".TrackMyWorkout"
+            android:exported="false" />
         <activity
             android:name=".Dashboard"
             android:exported="false" />
