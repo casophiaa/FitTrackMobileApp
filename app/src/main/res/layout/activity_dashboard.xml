@@ -7,84 +7,192 @@
     android:layout_height="match_parent"
     tools:context=".Dashboard">
 
-<!--    icon-->
-    <ImageView
-        android:id="@+id/profilePic"
-        android:layout_width="64dp"
+    <!--    icon-->
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="356dp"
         android:layout_height="61dp"
-        app:srcCompat="@drawable/circle"
-        tools:layout_editor_absoluteX="320dp"
-        tools:layout_editor_absoluteY="24dp" />
-<!--header-->
-    <TextView
-        android:id="@+id/helloName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins"
-        android:text="Hello, Name"
-        tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="34dp" />
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="27dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Thursday, October 8"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="50dp" />
+        <LinearLayout
+            android:layout_width="291dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/helloName"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:fontFamily="@font/poppins"
+                android:text="Hello, Name" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Thursday, October 8"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/profilePic"
+            android:layout_width="64dp"
+            android:layout_height="61dp"
+            app:srcCompat="@drawable/circle" />
+
+    </LinearLayout>
+
+    <!--header-->
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="170dp"
-        android:layout_height="105dp"
-        app:cardBackgroundColor="@android:color/transparent"
-        app:cardCornerRadius="16dp"
-        app:strokeColor="#8664FF"
-        app:strokeWidth="2dp"
-        tools:layout_editor_absoluteX="210dp"
-        tools:layout_editor_absoluteY="212dp" />
-
-    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/stepsCount"
         android:layout_width="350dp"
         android:layout_height="100dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="31dp"
         app:cardBackgroundColor="@android:color/transparent"
         app:cardCornerRadius="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header"
         app:strokeColor="#8664FF"
-        app:strokeWidth="2dp"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="94dp" />
+        app:strokeWidth="5dp" >
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="327dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center|right"
+            android:text="23000 steps"
+            android:textSize="24sp" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            app:srcCompat="@drawable/stepsicon" />
+
+    </com.google.android.material.card.MaterialCardView>
+
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/trackWorkout"
+        android:layout_width="170dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="31dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stepsCount"
+        app:strokeColor="#8664FF"
+        app:strokeWidth="2dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="97dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="bottom"
+            android:padding="10dp"
+            android:text="Track My Workout"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/findMaps"
         android:layout_width="170dp"
         android:layout_height="223dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="18dp"
         app:cardBackgroundColor="@android:color/transparent"
         app:cardCornerRadius="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stepsCount"
         app:strokeColor="#8664FF"
-        app:strokeWidth="2dp"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="212dp" />
+        app:strokeWidth="2dp">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/d" />
+
+        <!-- Purple low opacity -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#600D0D38" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="134dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="bottom"
+            android:padding="10dp"
+            android:text="Find Gyms &amp; Parks"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" /> <!-- #66 is the opacity level -->
+
+
+    </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/exerciseCard"
         android:layout_width="170dp"
-        android:layout_height="105dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="31dp"
         app:cardBackgroundColor="@android:color/transparent"
         app:cardCornerRadius="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trackWorkout"
         app:strokeColor="#8664FF"
-        app:strokeWidth="2dp"
-        tools:layout_editor_absoluteX="210dp"
-        tools:layout_editor_absoluteY="330dp" />
+        app:strokeWidth="2dp" >
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="97dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="top"
+            android:padding="10dp"
+            android:text="Exercise"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+    </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/dark_purple"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="652dp" >
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressFeatures">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="44dp"
             android:layout_margin="10dp"
             android:orientation="horizontal">
 
@@ -96,18 +204,19 @@
 
                 <ImageView
                     android:id="@+id/imageView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
                     android:layout_weight="1"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    app:srcCompat="@drawable/home" />
 
                 <TextView
                     android:id="@+id/textView3"
                     android:layout_width="match_parent"
-                    android:layout_height="5dp"
+                    android:layout_height="3dp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/poppins"
                     android:gravity="center"
-                    android:text="TextView"
+                    android:text="Home"
                     android:textColor="#FFFFFF" />
 
             </LinearLayout>
@@ -121,17 +230,18 @@
                 <ImageView
                     android:id="@+id/imageView9"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="10dp"
                     android:layout_weight="1"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    app:srcCompat="@drawable/progress" />
 
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="match_parent"
-                    android:layout_height="5dp"
+                    android:layout_height="3dp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/poppins"
                     android:gravity="center"
-                    android:text="TextView"
+                    android:text="Progress"
                     android:textColor="#FFFFFF" />
             </LinearLayout>
 
@@ -144,17 +254,18 @@
                 <ImageView
                     android:id="@+id/imageView10"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="10dp"
                     android:layout_weight="1"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    app:srcCompat="@drawable/plan" />
 
                 <TextView
                     android:id="@+id/textView5"
                     android:layout_width="match_parent"
-                    android:layout_height="5dp"
+                    android:layout_height="3dp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/poppins"
                     android:gravity="center"
-                    android:text="TextView"
+                    android:text="Plan"
                     android:textColor="#FFFFFF" />
 
             </LinearLayout>
@@ -166,10 +277,47 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="232dp"
         android:fontFamily="@font/poppins_bold"
         android:text="Progress Features"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="449dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/findMaps" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/progressFeatures"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:layout_margin="16dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="245dp"
+        android:foregroundGravity="top"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.076"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/horizontalRv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="top"
+            android:background="@android:color/transparent"
+            android:elevation="0dp"
+            android:foregroundGravity="top"
+            android:overScrollMode="never"
+            android:scrollbars="horizontal" />
+
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
