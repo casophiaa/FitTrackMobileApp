@@ -92,15 +92,16 @@
         android:layout_height="70dp"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="31dp"
-        android:focusable="true"
         android:clickable="true"
+        android:focusable="true"
+        android:onClick="trackMyWorkout"
         app:cardBackgroundColor="@android:color/transparent"
         app:cardCornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/findMaps"
         app:layout_constraintTop_toBottomOf="@+id/stepsCount"
         app:strokeColor="#8664FF"
-        app:strokeWidth="2dp"
-        android:onClick="trackMyWorkout">
+        app:strokeWidth="2dp">
 
         <TextView
             android:id="@+id/textView"
@@ -163,15 +164,16 @@
         android:layout_height="140dp"
         android:layout_marginTop="13dp"
         android:layout_marginEnd="31dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="exerciseWithMe"
         app:cardBackgroundColor="@android:color/transparent"
         app:cardCornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/findMaps"
         app:layout_constraintTop_toBottomOf="@+id/trackWorkout"
         app:strokeColor="#8664FF"
-        app:strokeWidth="2dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="exerciseWithMe">
+        app:strokeWidth="2dp">
 
 
         <ImageView
