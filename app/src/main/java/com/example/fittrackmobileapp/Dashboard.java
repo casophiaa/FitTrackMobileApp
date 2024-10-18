@@ -66,4 +66,9 @@ public class Dashboard extends AppCompatActivity {
         Intent i = new Intent(Dashboard.this, ProgressPage.class);
         startActivity(i);
     }
+
+    public void dashboard (View v) {
+        Intent i = new Intent(this, Dashboard.class);
+        startActivity(i);
+    }
 }
