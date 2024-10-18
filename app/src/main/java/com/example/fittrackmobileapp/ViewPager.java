@@ -81,7 +81,7 @@ public class ViewPager extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Intent to navigate to the dashboard
-                Intent intent = new Intent(ViewPager.this, Dashboard.class);
+                Intent intent = new Intent(ViewPager.this, Register.class);
                 startActivity(intent);
                 finish(); // Optional: if you want to close the ViewPager activity
             }
