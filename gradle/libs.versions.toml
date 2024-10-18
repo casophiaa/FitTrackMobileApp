@@ -8,6 +8,7 @@ material = "1.12.0"
 playServicesMaps = "19.0.0"
 activity = "1.9.2"
 constraintlayout = "2.1.4"
+recyclerviewV7 = "26.1.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -18,6 +19,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+recyclerview-v7 = { module = "com.android.support:recyclerview-v7", version.ref = "recyclerviewV7" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

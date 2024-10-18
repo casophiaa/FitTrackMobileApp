@@ -22,18 +22,20 @@ import java.util.Locale;
 
 public class ProgressPage extends AppCompatActivity{
 
-    private ProgressBar progressBar;
-    private int CurrentProgress;
+    //for mco3
+    //private ProgressBar progressBar;
+    //private int CurrentProgress;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress);
 
-        // will implement fetching user action data to show progress in the final (i.e. steps, exercises, etc.)
+        // will implement fetching user action data to show progress in mco3 (i.e. steps, exercises, etc.)
         // progressBar = findViewById(R.id.progressBar);
 
-        //for the dates - will implement in the final
+        //for the dates - will implement in mco3
         //date = findViewById(R.id.);
         //Date currentTime = Calendar.getInstance().getTime();
         //String formattedDate = DateFormat.getDateInstance(DateFormat.FULL).format(currentTime);
