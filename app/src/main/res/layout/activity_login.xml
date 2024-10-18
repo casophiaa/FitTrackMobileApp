@@ -159,7 +159,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/poppins"
-                android:onClick="gotoLogin"
+                android:onClick="backToReg"
                 android:text="Register here"
                 android:textColor="@color/blue" />
 
