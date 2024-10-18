@@ -42,6 +42,12 @@
             android:name=".TrackMyWorkout"
             android:exported="false" />
         <activity
+            android:name=".ProgressPage"
+            android:exported="false" />
+        <activity
+            android:name=".PlanPage"
+            android:exported="false" />
+        <activity
             android:name=".Dashboard"
             android:exported="false" />
         <activity

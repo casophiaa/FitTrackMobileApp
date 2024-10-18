@@ -5,57 +5,97 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_bold"
-        android:text="My Progress"
-        android:textSize="25sp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="126dp"
-        tools:layout_editor_absoluteY="34dp" />
+    <LinearLayout
+        android:id="@+id/progChart"
+        android:layout_width="409dp"
+        android:layout_height="280dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:indeterminateOnly="false"
-        android:progressDrawable="@drawable/custom_progressbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"/>
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="My Progress"
+            android:textSize="25sp"
+            tools:layout_editor_absoluteX="126dp"
+            tools:layout_editor_absoluteY="34dp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:indeterminateOnly="false"
+            android:progressDrawable="@drawable/custom_progressbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/Pictures"
         android:layout_width="match_parent"
         android:layout_height="260dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="278dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar">
+        app:layout_constraintTop_toBottomOf="@+id/progChart">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/progressFeatures"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:layout_margin="16dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginEnd="245dp"
+            android:foregroundGravity="top"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.076"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/horizontalRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="top"
+                android:background="@android:color/transparent"
+                android:elevation="0dp"
+                android:foregroundGravity="top"
+                android:overScrollMode="never"
+                android:scrollbars="horizontal" />
+
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:orientation="vertical"
+        android:layout_marginTop="56dp"
         android:gravity="center"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="278dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Pictures">
 
         <Button
             android:id="@+id/btnPhoto"
-            android:layout_height="100dp"
             android:layout_width="wrap_content"
+            android:layout_height="100dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="Take Photo"
-            />
+            android:text="Take Photo" />
 
     </LinearLayout>
 
@@ -64,11 +104,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/dark_purple"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="675dp"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:layout_width="match_parent"

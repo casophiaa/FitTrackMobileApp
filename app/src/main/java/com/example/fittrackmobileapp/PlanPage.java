@@ -24,12 +24,15 @@ public class PlanPage extends AppCompatActivity{
 
     // might going to use the recycler view where the list of exercise are at
     public void beginnerLevel(View v) {
+
     }
 
     public void intermediateLevel(View v) {
+
     }
 
     public void advancedLevel(View v) {
+
     }
 
     public void customExercise(View v) {
