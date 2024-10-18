@@ -30,17 +30,14 @@ public class ProgressPage extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress);
 
-        // will implement fetching user action data to show progress (i.e. steps, exercises, etc.)
-        progressBar = findViewById(R.id.progressBar);
+        // will implement fetching user action data to show progress in the final (i.e. steps, exercises, etc.)
+        // progressBar = findViewById(R.id.progressBar);
 
-        //for the dates
+        //for the dates - will implement in the final
         //date = findViewById(R.id.);
-
-        Date currentTime = Calendar.getInstance().getTime();
-        String formattedDate = DateFormat.getDateInstance(DateFormat.FULL).format(currentTime);
-
-        String[] splitDate = formattedDate.split(",");
-
+        //Date currentTime = Calendar.getInstance().getTime();
+        //String formattedDate = DateFormat.getDateInstance(DateFormat.FULL).format(currentTime);
+        //String[] splitDate = formattedDate.split(",");
         //date.setText(splitDate[1]); //to get month & day
     }
 
