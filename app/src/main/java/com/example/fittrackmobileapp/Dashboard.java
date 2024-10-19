@@ -59,22 +59,27 @@ public class Dashboard extends AppCompatActivity {
     }
 
     public void trackMyWorkout(View v) {
-        Intent i = new Intent(Dashboard.this, TrackMyWorkout.class);
+        Intent i = new Intent(this, TrackMyWorkout.class);
         startActivity(i);
     }
 
     public void exerciseWithMe(View v) {
-        Intent i = new Intent(Dashboard.this, ExerciseWithMe.class);
+        Intent i = new Intent(this, ExerciseWithMe.class);
         startActivity(i);
     }
 
     public void workoutSuggestion(View v) {
-        Intent i = new Intent(Dashboard.this, PlanPage.class);
+        Intent i = new Intent(this, PlanPage.class);
         startActivity(i);
     }
 
     public void checkProgress(View v) {
-        Intent i = new Intent(Dashboard.this, ProgressPage.class);
+        Intent i = new Intent(this, ProgressPage.class);
+        startActivity(i);
+    }
+
+    public void dashboard(View v) {
+        Intent i = new Intent(this, Dashboard.class);
         startActivity(i);
     }
 

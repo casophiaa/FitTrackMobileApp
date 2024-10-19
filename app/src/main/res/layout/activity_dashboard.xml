@@ -112,7 +112,7 @@
         <!-- Purple low opacity -->
 
         <View
-            android:layout_width="match_parent"
+            android:layout_width="169dp"
             android:layout_height="match_parent"
             android:background="#600D0D38" />
 
@@ -236,7 +236,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:onClick="dashboard">
 
                 <ImageView
                     android:id="@+id/imageView5"
