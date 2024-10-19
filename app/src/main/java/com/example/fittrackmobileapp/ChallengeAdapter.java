@@ -10,8 +10,9 @@ import java.util.ArrayList;
 public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.MyHolder>{
     ArrayList<ChallengeItem> data;
 
+    @NonNull
     @Override
-    public ChallengeAdapter.MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return null;
     }
 

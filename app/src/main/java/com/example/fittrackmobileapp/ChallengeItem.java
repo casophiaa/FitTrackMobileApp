@@ -8,6 +8,23 @@ public class ChallengeItem {
     public ChallengeItem(String day, String exercise, String desc, int imageSource){
         this.day = day;
         this.exercise =exercise;
-        this.day = day;
+        this.desc = desc;
+        this.imageSource = imageSource;
+    }
+
+    public String getDay(){
+        return day;
+    }
+
+    public String getExercise(){
+        return exercise;
+    }
+
+    public String getDesc(){
+        return desc;
+    }
+
+    public int getImageSource(){
+        return imageSource;
     }
 }
