@@ -3,6 +3,8 @@ package com.example.fittrackmobileapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -21,6 +23,7 @@ public class Dashboard extends AppCompatActivity {
     ArrayList<ProgFeatItem> dataSource;
     LinearLayoutManager linearLayoutManager;
     DashAdapter dashAdapter;
+    TextView gymsNparksBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class Dashboard extends AppCompatActivity {
             return insets;
         });
 
+        gymsNparksBtn = findViewById(R.id.gymNparkContainer);
         horizontalRv = findViewById(R.id.horizontalRv);
         String currentDate = new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault()).format(new Date());
         dataSource = new ArrayList<>();
@@ -45,6 +49,13 @@ public class Dashboard extends AppCompatActivity {
         dashAdapter = new DashAdapter(dataSource);
         horizontalRv.setLayoutManager(linearLayoutManager);
         horizontalRv.setAdapter(dashAdapter);
+
+        gymsNparksBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gymsNparksPage();
+            }
+        });
     }
 
     public void trackMyWorkout(View v) {
@@ -64,6 +75,11 @@ public class Dashboard extends AppCompatActivity {
 
     public void checkProgress(View v) {
         Intent i = new Intent(Dashboard.this, ProgressPage.class);
+        startActivity(i);
+    }
+
+    public void gymsNparksPage() {
+        Intent i = new Intent(Dashboard.this, GymsParks.class);
         startActivity(i);
     }
 }

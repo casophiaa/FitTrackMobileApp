@@ -117,7 +117,7 @@
             android:background="#600D0D38" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/gymNparkContainer"
             android:layout_width="134dp"
             android:layout_height="match_parent"
             android:fontFamily="@font/poppins_bold"
@@ -132,6 +132,7 @@
 
 
     <!-- LinearLayout containing trackWorkout and exerciseCard -->
+
     <LinearLayout
         android:id="@+id/trackExerciseContainer"
         android:layout_width="365dp"
@@ -144,7 +145,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stepsCount">
-
 
 
         <!-- trackWorkout CardView -->
