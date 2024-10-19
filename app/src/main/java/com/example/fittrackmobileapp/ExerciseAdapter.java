@@ -36,17 +36,14 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
         holder.textView.setText(item.getName());
         holder.imageView.setImageResource(item.getImageResource());
 
-        // Set click listener for the card
         holder.cardView.setOnClickListener(v -> {
-            if (item.getName().equals("Yoga")) {
-                // Start YogaActivity when Yoga card is clicked
-                context.startActivity(new Intent(context, Yoga.class));
-            }
+            Intent intent = new Intent(context, ExerciseDetails.class);
+            intent.putExtra("EXERCISE_NAME", item.getName());
+            context.startActivity(intent);
         });
 
         Log.d("ExerciseAdapter", "Binding item: " + item.getName());
     }
-
 
     @Override
     public int getItemCount() {
@@ -66,5 +63,4 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
             cardView = itemView.findViewById(R.id.cardView);
         }
     }
-
 }

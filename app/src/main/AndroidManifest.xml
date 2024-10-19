@@ -16,13 +16,13 @@
         android:theme="@style/Theme.FitTrackMobileApp"
         tools:targetApi="31">
         <activity
+            android:name=".ExerciseDetails"
+            android:exported="false" />
+        <activity
             android:name=".Login"
             android:exported="false" />
         <activity
             android:name=".Register"
-            android:exported="false" />
-        <activity
-            android:name=".Yoga"
             android:exported="false" />
         <activity
             android:name=".ExerciseItem"

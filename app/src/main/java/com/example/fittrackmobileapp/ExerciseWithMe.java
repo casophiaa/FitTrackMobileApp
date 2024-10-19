@@ -21,7 +21,6 @@ public class ExerciseWithMe extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
 
-        // Initialize data
         exerciseList = new ArrayList<>();
         exerciseList.add(new ExerciseItem("Yoga", R.drawable.yoga));
         exerciseList.add(new ExerciseItem("Pilates", R.drawable.pilates));
@@ -30,9 +29,8 @@ public class ExerciseWithMe extends AppCompatActivity {
         exerciseList.add(new ExerciseItem("Endurance Training", R.drawable.endurance));
         exerciseList.add(new ExerciseItem("HIIT", R.drawable.hiit));
 
-        // Setup RecyclerView with a GridLayoutManager
         adapter = new ExerciseAdapter(this, exerciseList);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2)); // 2 columns
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(adapter);
     }
 }
