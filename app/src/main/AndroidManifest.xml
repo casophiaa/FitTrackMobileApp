@@ -54,6 +54,15 @@
             android:name=".PlanPage"
             android:exported="false" />
         <activity
+            android:name=".PlanBeginner"
+            android:exported="false" />
+        <activity
+            android:name=".PlanIntermediate"
+            android:exported="false" />
+        <activity
+            android:name=".PlanAdvanced"
+            android:exported="false" />
+        <activity
             android:name=".Dashboard"
             android:exported="false" />
         <activity
