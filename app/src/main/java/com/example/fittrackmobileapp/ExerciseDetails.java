@@ -29,15 +29,15 @@ public class ExerciseDetails extends AppCompatActivity {
         button30DayChallenge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle 30 Day Challenge selection
+                Intent intent = new Intent(ExerciseDetails.this, thirtyChallenge.class);
+                startActivity(intent);
             }
         });
 
         buttonNthMinute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle 30 Day Challenge selection
-
+                // Handle nth minute selection
             }
         });
     }
