@@ -13,29 +13,52 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class PlanPage extends AppCompatActivity{
+
+    RecyclerView recyclerView;
+    ExerciseAdapter adapter;
+    List<ExerciseItem> exerciseList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan);
     }
 
-    // might going to use the recycler view where the list of exercise are at
     public void beginnerLevel(View v) {
-
+        Intent i = new Intent(this, PlanBeginner.class);
+        startActivity(i);
     }
 
     public void intermediateLevel(View v) {
-
+        Intent i = new Intent(this, PlanIntermediate.class);
+        startActivity(i);
     }
 
     public void advancedLevel(View v) {
-
+        Intent i = new Intent(this, PlanAdvanced.class);
+        startActivity(i);
     }
 
     public void customExercise(View v) {
 
+    }
+
+    public void workoutSuggestion(View v) {
+        Intent i = new Intent(this, PlanPage.class);
+        startActivity(i);
+    }
+
+    public void checkProgress(View v) {
+        Intent i = new Intent(this, ProgressPage.class);
+        startActivity(i);
+    }
+
+    public void dashboard(View v) {
+        Intent i = new Intent(this, Dashboard.class);
+        startActivity(i);
     }
 }

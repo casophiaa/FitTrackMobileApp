@@ -26,6 +26,14 @@ public class ProgressPage extends AppCompatActivity{
     //private ProgressBar progressBar;
     //private int CurrentProgress;
 
+    RecyclerView horizontalRv;
+    ArrayList<ProgFeatItem> dataSource;
+    LinearLayoutManager linearLayoutManager;
+    DashAdapter dashAdapter;
+
+    /* Camera feature to implement in MCO3
+    Button takePhoto;
+    ImageView imageProfile;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +43,46 @@ public class ProgressPage extends AppCompatActivity{
         // will implement fetching user action data to show progress in mco3 (i.e. steps, exercises, etc.)
         // progressBar = findViewById(R.id.progressBar);
 
-        //for the dates - will implement in mco3
-        //date = findViewById(R.id.);
-        //Date currentTime = Calendar.getInstance().getTime();
-        //String formattedDate = DateFormat.getDateInstance(DateFormat.FULL).format(currentTime);
-        //String[] splitDate = formattedDate.split(",");
-        //date.setText(splitDate[1]); //to get month & day
+        horizontalRv = findViewById(R.id.horizontalRv);
+        String currentDate = new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault()).format(new Date());
+        dataSource = new ArrayList<>();
+        dataSource.add(new ProgFeatItem(currentDate, R.drawable.a));
+        dataSource.add(new ProgFeatItem(currentDate, R.drawable.fimmies2));
+        dataSource.add(new ProgFeatItem(currentDate, R.drawable.fimmies1));
+
+        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        dashAdapter = new DashAdapter(dataSource);
+        horizontalRv.setLayoutManager(linearLayoutManager);
+        horizontalRv.setAdapter(dashAdapter);
+
+        /* Take Photo Feature
+        imageProfile = findViewById(R.id.image);
+        takePhoto = findViewById(R.id.btnPhoto);
+
+        takePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onCLick(View v) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(intent, 1);
+                }
+            }
+        }); */
     }
 
+    public void workoutSuggestion(View v) {
+        Intent i = new Intent(this, PlanPage.class);
+        startActivity(i);
+    }
 
+    public void checkProgress(View v) {
+        Intent i = new Intent(this, ProgressPage.class);
+        startActivity(i);
+    }
+
+    public void dashboard(View v) {
+        Intent i = new Intent(this, Dashboard.class);
+        startActivity(i);
+    }
 
 }

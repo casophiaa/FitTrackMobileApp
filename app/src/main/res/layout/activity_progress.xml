@@ -121,6 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="dashboard"
                 android:orientation="vertical">
 
                 <ImageView
@@ -146,6 +147,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="checkProgress"
                 android:orientation="vertical">
 
                 <ImageView
@@ -170,6 +172,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="workoutSuggestion"
                 android:orientation="vertical">
 
                 <ImageView
