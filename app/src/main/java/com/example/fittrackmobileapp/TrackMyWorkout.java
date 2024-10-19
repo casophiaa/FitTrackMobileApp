@@ -39,7 +39,7 @@ public class TrackMyWorkout extends FragmentActivity implements OnMapReadyCallba
             public void onClick(View v) {
                 Intent intent = new Intent(TrackMyWorkout.this, Dashboard.class);
                 startActivity(intent);
-                finish(); // Optional: Finish the current activity if you don't want to return to it
+                finish();
             }
         });
 
@@ -67,5 +67,6 @@ public class TrackMyWorkout extends FragmentActivity implements OnMapReadyCallba
 
     private void startTrackingOutdoorActivities() {
         // Implement your logic to start tracking outdoor activities
+        // accelerometer logic here
     }
 }
