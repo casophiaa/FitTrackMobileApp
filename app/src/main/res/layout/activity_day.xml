@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Exercise Info Layout -->
     <LinearLayout
         android:id="@+id/thirtyChallenge"
         android:layout_width="match_parent"
@@ -16,7 +17,7 @@
             android:layout_margin="5dp"
             app:cardBackgroundColor="#FFFFFF"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"> <!-- Changed to wrap_content -->
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -55,9 +56,7 @@
                         android:layout_height="wrap_content"/>
 
                 </LinearLayout>
-
             </LinearLayout>
-
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -76,10 +75,57 @@
             android:text="Details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-
     </LinearLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/thirtyChallenge"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/timerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/videoView"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:text="00:00"
+        android:textSize="18sp"
+        android:textColor="#000" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/timerTextView"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/startButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Play" />
+
+        <Button
+            android:id="@+id/pauseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pause"
+            android:layout_marginStart="16dp" />
+
+        <Button
+            android:id="@+id/doneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Done"
+            android:layout_marginStart="16dp" />
+    </LinearLayout>
+
+<com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -94,7 +140,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:orientation="vertical"
             android:onClick="dashboard">
@@ -118,7 +164,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:onClick="checkProgress"
             android:orientation="vertical">
@@ -141,7 +187,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:onClick="workoutSuggestion"
             android:orientation="vertical">

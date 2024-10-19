@@ -62,7 +62,7 @@ public class thirtyChallenge extends AppCompatActivity {
                 new ChallengeData("Day 30", "Full Body Challenge", R.drawable.yogafive, "3 rounds: 1 min Burpees, 1 min Squats, 1 min Plank")
         };
 
-        ChallengeAdapter challengeAdapter = new ChallengeAdapter(ChallengeData, this); // Use 'this' to pass context
+        ChallengeAdapter challengeAdapter = new ChallengeAdapter(ChallengeData, this);
         recyclerView.setAdapter(challengeAdapter);
     }
 }

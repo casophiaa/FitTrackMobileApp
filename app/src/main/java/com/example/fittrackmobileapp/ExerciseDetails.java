@@ -37,7 +37,8 @@ public class ExerciseDetails extends AppCompatActivity {
         buttonNthMinute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle nth minute selection
+                Intent intent = new Intent(ExerciseDetails.this, NthMinuteWorkout.class);
+                startActivity(intent);
             }
         });
     }

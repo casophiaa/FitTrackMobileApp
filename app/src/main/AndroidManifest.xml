@@ -16,8 +16,11 @@
         android:theme="@style/Theme.FitTrackMobileApp"
         tools:targetApi="31">
         <activity
+            android:name=".NthMinuteWorkout"
+            android:exported="false" />
+        <activity
             android:name=".ChallengeActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".thirtyChallenge"
             android:exported="false" />
