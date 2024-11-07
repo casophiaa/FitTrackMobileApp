@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "387839032763",
+    "firebase_url": "https://fittrack-mobdeve-fc068-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "fittrack-mobdeve-fc068",
+    "storage_bucket": "fittrack-mobdeve-fc068.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:387839032763:android:5316974a6167f1e992189e",
+        "android_client_info": {
+          "package_name": "com.example.fittrackmobileapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3MQNXOQswhyRqDtdPFA6K1jzA5I8ZLNU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

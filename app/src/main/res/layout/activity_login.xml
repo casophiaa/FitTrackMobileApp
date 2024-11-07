@@ -23,7 +23,7 @@
             android:layout_width="60dp"
             android:layout_height="53dp"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/login_icon" />
+            app:srcCompat="@drawable/dark_logo" />
 
         <TextView
             android:id="@+id/textView14"

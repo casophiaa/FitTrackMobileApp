@@ -1,3 +1,9 @@
+//GROUP MEMBERS:
+//        SALGADO
+//        ORENCIA
+//        MEDINA
+//        JACOB
+
 package com.example.fittrackmobileapp;
 
 import android.content.Intent;
