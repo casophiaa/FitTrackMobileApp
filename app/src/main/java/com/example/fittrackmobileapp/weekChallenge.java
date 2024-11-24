@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NthMinuteWorkout extends AppCompatActivity {
+public class weekChallenge extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ChallengeAdapter challengeAdapter;
@@ -28,7 +28,7 @@ public class NthMinuteWorkout extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nth_minute_workout);
+        setContentView(R.layout.activity_thirty);
 
         // Get the selected exercise name
         exerciseName = getIntent().getStringExtra("EXERCISE_NAME");
@@ -49,7 +49,7 @@ public class NthMinuteWorkout extends AppCompatActivity {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance()
                 .getReference("exercise")
                 .child(exerciseName)
-                .child("NthMinuteWorkout");
+                .child("dayChallenges");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -92,7 +92,7 @@ public class NthMinuteWorkout extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError error) {
                 Log.e("FirebaseError", "Failed to read data", error.toException());
-                Toast.makeText(NthMinuteWorkout.this, "Failed to load data.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(weekChallenge.this, "Failed to load data.", Toast.LENGTH_SHORT).show();
             }
         });
     }

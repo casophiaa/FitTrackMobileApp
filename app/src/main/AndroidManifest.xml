@@ -26,7 +26,7 @@
             android:name=".ChallengeActivity"
             android:exported="false" />
         <activity
-            android:name=".thirtyChallenge"
+            android:name=".weekChallenge"
             android:exported="false" />
         <activity
             android:name=".ExerciseDetails"

@@ -31,12 +31,12 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/button30DayChallenge"
+        android:id="@+id/buttonDayChallenge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_marginBottom="48dp"
-        android:text="30 Day Challenge"
+        android:text="One Week Challenge"
         app:layout_constraintBottom_toTopOf="@id/buttonNthMinute"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

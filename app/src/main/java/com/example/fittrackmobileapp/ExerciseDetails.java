@@ -20,16 +20,17 @@ public class ExerciseDetails extends AppCompatActivity {
 
         exerciseName = getIntent().getStringExtra("EXERCISE_NAME");
 
-        Button button30DayChallenge = findViewById(R.id.button30DayChallenge);
+        Button buttonDayChallenge = findViewById(R.id.buttonDayChallenge);
         Button buttonNthMinute = findViewById(R.id.buttonNthMinute);
 
         mVideoView = findViewById(R.id.videoView);
         setupVideoView();
 
-        button30DayChallenge.setOnClickListener(new View.OnClickListener() {
+        buttonDayChallenge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ExerciseDetails.this, thirtyChallenge.class);
+                Intent intent = new Intent(ExerciseDetails.this, weekChallenge.class);
+                intent.putExtra("EXERCISE_NAME", exerciseName);
                 startActivity(intent);
             }
         });
@@ -38,6 +39,7 @@ public class ExerciseDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ExerciseDetails.this, NthMinuteWorkout.class);
+                intent.putExtra("EXERCISE_NAME", exerciseName);
                 startActivity(intent);
             }
         });

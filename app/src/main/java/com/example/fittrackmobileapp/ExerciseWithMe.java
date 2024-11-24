@@ -36,7 +36,7 @@ public class ExerciseWithMe extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(adapter);
 
-        DatabaseReference database = FirebaseDatabase.getInstance().getReference("FitTrack/exercise");
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference("exercise");
 
         database.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
