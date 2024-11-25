@@ -33,9 +33,7 @@ public class ProgAdapter extends RecyclerView.Adapter<ProgAdapter.PhotoViewHolde
     }
 
     @Override
-    public int getItemCount() {
-        return photoList.size();
-    }
+    public int getItemCount() { return photoList.size(); }
 
     public static class PhotoViewHolder extends RecyclerView.ViewHolder {
         ImageView image;

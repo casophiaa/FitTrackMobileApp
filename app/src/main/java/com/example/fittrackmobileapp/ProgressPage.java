@@ -8,7 +8,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,9 +32,6 @@ import java.util.Locale;
 
 public class ProgressPage extends AppCompatActivity{
 
-    //for mco3
-    //private ProgressBar progressBar;
-    //private int CurrentProgress;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
 
     RecyclerView horizontalRv;
@@ -44,41 +45,39 @@ public class ProgressPage extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress);
 
-        // will implement fetching user action data to show progress in mco3 (i.e. steps, exercises, etc.)
-        // progressBar = findViewById(R.id.progressBar);
-
         horizontalRv = findViewById(R.id.horizontalRv);
         dataSource = new ArrayList<>();
-        /*dataSource.add(new ProgFeatItem(currentDate, R.drawable.a));
-        dataSource.add(new ProgFeatItem(currentDate, R.drawable.fimmies2));
-        dataSource.add(new ProgFeatItem(currentDate, R.drawable.fimmies1));*/
+        Button btnCapture = findViewById(R.id.btnPhoto);
 
         gridLayoutManager = new GridLayoutManager(this, 2);
         progAdapter = new ProgAdapter(dataSource);
         horizontalRv.setLayoutManager(gridLayoutManager);
         horizontalRv.setAdapter(progAdapter);
 
-        takePictureLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                        Bundle extras = result.getData().getExtras();
-                        Bitmap imageBitmap = (Bitmap) extras.get("data");
-
-                        String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-                        dataSource.add(new ProgressItem(currentDate, imageBitmap));
-                        // progAdapter.notifyDataSetChanged();
-                    }
-                });
-
-        Button btnCapture = findViewById(R.id.btnPhoto);
-        btnCapture.setOnClickListener(view -> {
-            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (takePictureIntent.resolveActivity(getPackageManager()) != null){
-                takePictureLauncher.launch(takePictureIntent);
+        takePictureLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    Bundle extras = result.getData().getExtras();
+                    Bitmap imageBitmap = (Bitmap) extras.get("data");
+                    String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+                    dataSource.add(new ProgressItem(currentDate, imageBitmap));
+                    // progAdapter.notifyDataSetChanged();
+                }
             }
         });
 
+        btnCapture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    takePictureLauncher.launch(takePictureIntent);
+                } else {
+                    Toast.makeText(ProgressPage.this, "there is no app that supports this action", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     public void workoutSuggestion(View v) {
