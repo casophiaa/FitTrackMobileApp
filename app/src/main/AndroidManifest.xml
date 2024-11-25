@@ -15,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FitTrackMobileApp"
         tools:targetApi="31">
-
+        <activity
+            android:name=".RegMoreInfo"
+            android:exported="false" />
         <activity
             android:name=".GymsParks"
             android:exported="false" />

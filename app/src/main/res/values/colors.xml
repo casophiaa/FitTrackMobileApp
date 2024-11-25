@@ -8,5 +8,7 @@
     <color name="light_pink">#E0CAFF</color>
     <color name="blue">#4D81E7</color>
     <color name="red">#FF0000</color>
+    <color name="grey">#898989</color>
+
 
 </resources>

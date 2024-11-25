@@ -9,14 +9,18 @@
 
     <LinearLayout
         android:id="@+id/mainLayout"
-        android:layout_width="331dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
+        android:layout_marginStart="28dp"
         android:layout_marginTop="70dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="48dp"
         android:orientation="vertical"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="33dp">
+        app:layout_constraintVertical_bias="0.36">
 
         <ImageView
             android:id="@+id/imageView6"
@@ -46,18 +50,19 @@
             android:id="@+id/inputLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/EmailTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:ems="10"
                 android:fontFamily="@font/poppins"
                 android:inputType="textEmailAddress"
-                android:text="example@email.com"
-                android:layout_marginTop="10dp"/>
+                android:text="example@email.com" />
+
             <EditText
                 android:id="@+id/passwordTxt"
                 android:layout_width="match_parent"
@@ -105,43 +110,43 @@
             android:id="@+id/textView18"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:gravity="center"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
             android:text="or" />
 
         <Button
             android:id="@+id/continueWgoogleBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
             android:backgroundTint="@color/white"
-            android:textColor="@color/dark_purple"
-            android:onClick="submitRegistration"
             android:drawableLeft="@drawable/common_google_signin_btn_icon_light"
             android:drawablePadding="5dp"
-            android:text="Continue with Google" />
+            android:fontFamily="@font/poppins"
+            android:onClick="submitRegistration"
+            android:text="Continue with Google"
+            android:textColor="@color/dark_purple" />
 
         <Button
             android:id="@+id/continueWfacebookBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/dark_purple"
             android:layout_gravity="center"
-            android:scaleType="fitCenter"
-            android:onClick="submitRegistration"
+            android:backgroundTint="@color/white"
             android:drawableLeft="@drawable/facebook_logo"
             android:drawablePadding="2dp"
-            android:text="Continue with Facebook" />
+            android:fontFamily="@font/poppins"
+            android:onClick="submitRegistration"
+            android:scaleType="fitCenter"
+            android:text="Continue with Facebook"
+            android:textColor="@color/dark_purple" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <TextView
@@ -150,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/poppins"
-                android:text="Already have an account?" />
+                android:text="Don't have an account?" />
 
             <TextView
                 android:id="@+id/loginPageRegBtn"

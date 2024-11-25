@@ -16,7 +16,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Register extends AppCompatActivity {
 
-    private EditText firstNameTxt, lastNameTxt, emailTxt, dateTxt, phoneTxt, passwordTxt;
+    private EditText firstNameTxt, lastNameTxt, emailTxt, passwordTxt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,26 +35,22 @@ public class Register extends AppCompatActivity {
         firstNameTxt = findViewById(R.id.FirstNameTxt);
         lastNameTxt = findViewById(R.id.LastNameTxt);
         emailTxt = findViewById(R.id.EmailTxt);
-        dateTxt = findViewById(R.id.DateTxt);
-        phoneTxt = findViewById(R.id.PhoneTxt);
         passwordTxt = findViewById(R.id.passwordTxt);
 
-        Button registerBtn = findViewById(R.id.registerBtn);
+        Button nextBtn = findViewById(R.id.nextBtn);
         TextView loginBtn = findViewById(R.id.regPageLoginBtn);
 
         // Handle login button click
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                gotoLogin();
-            }
+            public void onClick(View view) {gotoLogin();}
         });
 
         // Handle register button click
-        registerBtn.setOnClickListener(new View.OnClickListener() {
+        nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                submitRegistration();
+                gotoMoreInfo();
             }
         });
     }
@@ -72,14 +69,6 @@ public class Register extends AppCompatActivity {
             Toast.makeText(this, "Please enter your email", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (dateTxt.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Please enter your date of birth", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (phoneTxt.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Please enter your phone number", Toast.LENGTH_SHORT).show();
-            return false;
-        }
         if (passwordTxt.getText().toString().isEmpty()) {
             Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show();
             return false;
@@ -87,14 +76,14 @@ public class Register extends AppCompatActivity {
         return true; // All inputs are valid
     }
 
-    public void submitRegistration() {
+    public void gotoMoreInfo() {
         // Check if all inputs are valid
-        if (areInputsValid()) {
+        //if (areInputsValid()) {
             // Proceed with the registration if inputs are valid
-            Intent intent = new Intent(Register.this, Login.class);
+            Intent intent = new Intent(Register.this, RegMoreInfo.class);
             startActivity(intent);
             finish();
-        }
+        //}
     }
 
     public void gotoLogin() {
