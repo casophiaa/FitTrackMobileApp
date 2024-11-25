@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    android:layout_margin="30px"
+    android:background="@color/light_pink"
+    android:orientation="vertical"
+    tools:context=".inputPage">
+
+    <TextView
+        android:id="@+id/goodDay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:text="Good Day!"
+        android:textColor="@color/dark_purple"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="657dp"
+        android:layout_height="181dp"
+        android:layout_marginTop="79dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goodDay"
+        app:srcCompat="@drawable/edittextcircular" />
+
+    <ImageView
+        android:id="@+id/resultImage"
+        android:layout_width="260dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goodDay"
+        app:srcCompat="@drawable/p1_approved" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="324dp"
+        android:layout_height="208dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="33dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resultImage"
+        app:layout_constraintVertical_bias="0.060000002">
+
+        <TextView
+            android:id="@+id/heightResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15px"
+            android:background="@drawable/edittextcircular"
+            android:gravity="center"
+            android:text="Height"
+            android:textColor="@color/dark_purple"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/weightResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15px"
+            android:background="@drawable/edittextcircular"
+            android:gravity="center"
+            android:text="Weight"
+            android:textColor="@color/dark_purple"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/genderResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15px"
+            android:background="@drawable/edittextcircular"
+            android:gravity="center"
+            android:text="Gender"
+            android:textColor="@color/dark_purple"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/contactNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15px"
+            android:background="@drawable/edittextcircular"
+            android:gravity="center"
+            android:text="Contact Number"
+            android:textColor="@color/dark_purple"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonVerdict"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="149dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="152dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/dark_purple"
+        android:onClick="btnClicked"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="1.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>

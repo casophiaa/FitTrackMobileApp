@@ -91,6 +91,9 @@
             android:name=".Dashboard"
             android:exported="false" />
         <activity
+            android:name=".UserProfile"
+            android:exported="false" />
+        <activity
             android:name=".ViewPager"
             android:exported="false" />
         <activity
