@@ -48,7 +48,12 @@
             android:id="@+id/profilePic"
             android:layout_width="64dp"
             android:layout_height="61dp"
-            app:srcCompat="@drawable/circle" />
+            app:srcCompat="@drawable/circle"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="Profile picture"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+
 
     </LinearLayout>
 

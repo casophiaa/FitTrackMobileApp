@@ -36,9 +36,9 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
-    implementation ("com.github.bumptech.glide:glide:4.15.1")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation(libs.firebase.auth)
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
     implementation(libs.constraintlayout)
     implementation(libs.play.services.maps)
     implementation(libs.firebase.database)
@@ -52,6 +52,8 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation("com.google.android.gms:play-services-maps:19.0.0")
     implementation ("com.android.volley:volley:1.2.1")
+    implementation ("com.google.android.libraries.places:places:4.1.0")
+
 
 
 }

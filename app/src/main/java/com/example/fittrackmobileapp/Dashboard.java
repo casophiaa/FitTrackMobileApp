@@ -3,6 +3,7 @@ package com.example.fittrackmobileapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -24,6 +25,7 @@ public class Dashboard extends AppCompatActivity {
     LinearLayoutManager linearLayoutManager;
     DashAdapter dashAdapter;
     TextView gymsNparksBtn;
+    ImageView profilePic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,8 @@ public class Dashboard extends AppCompatActivity {
         dataSource.add(new ProgFeatItem(currentDate, R.drawable.a));
         dataSource.add(new ProgFeatItem(currentDate, R.drawable.fimmies2));
         dataSource.add(new ProgFeatItem(currentDate, R.drawable.fimmies1));
+        profilePic = findViewById(R.id.profilePic);
+
 
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         dashAdapter = new DashAdapter(dataSource);
@@ -56,6 +60,18 @@ public class Dashboard extends AppCompatActivity {
                 gymsNparksPage();
             }
         });
+
+        profilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigateToUserProfile();
+            }
+        });
+    }
+
+    public void navigateToUserProfile() {
+        Intent intent = new Intent(this, UserProfile.class);
+        startActivity(intent);
     }
 
     public void trackMyWorkout(View v) {

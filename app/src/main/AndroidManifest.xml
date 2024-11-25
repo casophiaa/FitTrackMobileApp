@@ -67,7 +67,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD6uXxtELTLoRlaR_SQbVa-1szuLOTCCd4" />
+            android:value="AIzaSyAz5VUjgKK3GC2BbZhdsYWSNTsemJsNQrI" />
 
         <activity
             android:name=".TrackMyWorkout"
@@ -89,6 +89,9 @@
             android:exported="false" />
         <activity
             android:name=".Dashboard"
+            android:exported="false" />
+        <activity
+            android:name=".UserProfile"
             android:exported="false" />
         <activity
             android:name=".ViewPager"

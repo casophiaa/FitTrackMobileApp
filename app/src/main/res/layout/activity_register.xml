@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPassword"
-            android:text="password" />
+            android:hint="password" />
 
         <Button
             android:id="@+id/nextBtn"
