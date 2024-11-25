@@ -27,8 +27,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:fontFamily="@font/poppins"
-            android:inputType="text"
-            android:text="First Name" />
+            android:hint="First Name"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/LastNameTxt"
@@ -36,8 +36,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:fontFamily="@font/poppins"
-            android:inputType="text"
-            android:text="Last Name" />
+            android:hint="Last Name"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/EmailTxt"
@@ -45,8 +45,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:fontFamily="@font/poppins"
-            android:inputType="textEmailAddress"
-            android:text="example@email.com" />
+            android:hint="example@email.com"
+            android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/passwordTxt"

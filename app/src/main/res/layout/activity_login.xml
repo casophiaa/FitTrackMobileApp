@@ -60,8 +60,8 @@
                 android:layout_marginTop="10dp"
                 android:ems="10"
                 android:fontFamily="@font/poppins"
-                android:inputType="textEmailAddress"
-                android:text="example@email.com" />
+                android:hint="example@email.com"
+                android:inputType="textEmailAddress" />
 
             <EditText
                 android:id="@+id/passwordTxt"

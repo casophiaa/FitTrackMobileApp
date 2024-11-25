@@ -58,10 +58,13 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:fontFamily="@font/poppins"
-            android:inputType="date"
-            android:text="Birthday (mm/dd/yyyy)"
+            android:hint="Birthday (mm/dd/yyyy)"
+            android:focusable="false"
+            android:clickable="true"
+            android:inputType="none"
             android:textColor="@color/grey"
             android:textSize="15dp" />
+
 
         <EditText
             android:id="@+id/WeightTxt"
@@ -69,8 +72,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:fontFamily="@font/poppins"
+            android:hint="Weight (in kg)"
             android:inputType="text"
-            android:text="Weight (in kg)"
             android:textColor="@color/grey"
             android:textSize="15dp" />
 
@@ -80,8 +83,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:fontFamily="@font/poppins"
+            android:hint="Height (in cm)"
             android:inputType="text"
-            android:text="Height (in cm)"
             android:textColor="@color/grey"
             android:textSize="15dp" />
 

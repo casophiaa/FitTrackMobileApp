@@ -14,9 +14,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Login extends AppCompatActivity {
     private Button loginBtn;
     private EditText userEmail, userPW;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,9 @@ public class Login extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Initialize Firebase Auth
+        firebaseAuth = FirebaseAuth.getInstance();
 
         loginBtn = findViewById(R.id.loginBtn);
         TextView backToRegBtn = findViewById(R.id.loginPageRegBtn);
@@ -49,7 +55,6 @@ public class Login extends AppCompatActivity {
                 backToReg();
             }
         });
-
     }
 
     private boolean areInputsValid() {
@@ -67,14 +72,24 @@ public class Login extends AppCompatActivity {
     public void submitLogin() {
         // Check if all inputs are valid
         if (areInputsValid()) {
-            // Proceed with the registration if inputs are valid
-            Intent intent = new Intent(Login.this, Dashboard.class);
-            startActivity(intent);
-            finish();
+            String email = userEmail.getText().toString();
+            String password = userPW.getText().toString();
+
+            firebaseAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(Login.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(Login.this, Dashboard.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(Login.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
         }
     }
 
-    public void backToReg(){
+    public void backToReg() {
         Intent intent = new Intent(Login.this, Register.class);
         startActivity(intent);
         finish();

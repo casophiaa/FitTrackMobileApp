@@ -14,6 +14,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Register extends AppCompatActivity {
 
     private EditText firstNameTxt, lastNameTxt, emailTxt, passwordTxt;
@@ -77,14 +79,38 @@ public class Register extends AppCompatActivity {
     }
 
     public void gotoMoreInfo() {
+        // Get Firebase instance
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
+        // Retrieve user input values
+        String firstName = firstNameTxt.getText().toString();
+        String lastName = lastNameTxt.getText().toString();
+        String email = emailTxt.getText().toString();
+        String password = passwordTxt.getText().toString();
+
         // Check if all inputs are valid
-        //if (areInputsValid()) {
-            // Proceed with the registration if inputs are valid
-            Intent intent = new Intent(Register.this, RegMoreInfo.class);
-            startActivity(intent);
-            finish();
-        //}
+        if (areInputsValid()) {
+            // Register user in Firebase Authentication
+            firebaseAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(Register.this, "User registered successfully!", Toast.LENGTH_SHORT).show();
+
+                            // Pass data to the next activity
+                            Intent intent = new Intent(Register.this, RegMoreInfo.class);
+                            intent.putExtra("firstName", firstName);
+                            intent.putExtra("lastName", lastName);
+                            intent.putExtra("email", email);
+                            intent.putExtra("password", password);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(Register.this, "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
     }
+
 
     public void gotoLogin() {
         Intent intent = new Intent(Register.this, Login.class);

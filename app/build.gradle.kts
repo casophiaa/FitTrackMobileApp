@@ -37,10 +37,14 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation ("com.github.bumptech.glide:glide:4.15.1")
+    implementation(libs.firebase.auth)
     annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
     implementation(libs.constraintlayout)
     implementation(libs.play.services.maps)
     implementation(libs.firebase.database)
+
+
+
 
     testImplementation(libs.junit)
 
