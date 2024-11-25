@@ -1,15 +1,21 @@
 package com.example.fittrackmobileapp;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,15 +31,13 @@ public class ProgressPage extends AppCompatActivity{
     //for mco3
     //private ProgressBar progressBar;
     //private int CurrentProgress;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
 
     RecyclerView horizontalRv;
-    ArrayList<ProgFeatItem> dataSource;
-    LinearLayoutManager linearLayoutManager;
-    DashAdapter dashAdapter;
-
-    /* Camera feature to implement in MCO3
-    Button takePhoto;
-    ImageView imageProfile;*/
+    ArrayList<ProgressItem> dataSource;
+    GridLayoutManager gridLayoutManager;
+    ProgAdapter progAdapter;
+    ActivityResultLauncher<Intent> takePictureLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,30 +48,37 @@ public class ProgressPage extends AppCompatActivity{
         // progressBar = findViewById(R.id.progressBar);
 
         horizontalRv = findViewById(R.id.horizontalRv);
-        String currentDate = new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault()).format(new Date());
         dataSource = new ArrayList<>();
-        dataSource.add(new ProgFeatItem(currentDate, R.drawable.a));
+        /*dataSource.add(new ProgFeatItem(currentDate, R.drawable.a));
         dataSource.add(new ProgFeatItem(currentDate, R.drawable.fimmies2));
-        dataSource.add(new ProgFeatItem(currentDate, R.drawable.fimmies1));
+        dataSource.add(new ProgFeatItem(currentDate, R.drawable.fimmies1));*/
 
-        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        dashAdapter = new DashAdapter(dataSource);
-        horizontalRv.setLayoutManager(linearLayoutManager);
-        horizontalRv.setAdapter(dashAdapter);
+        gridLayoutManager = new GridLayoutManager(this, 2);
+        progAdapter = new ProgAdapter(dataSource);
+        horizontalRv.setLayoutManager(gridLayoutManager);
+        horizontalRv.setAdapter(progAdapter);
 
-        /* Take Photo Feature
-        imageProfile = findViewById(R.id.image);
-        takePhoto = findViewById(R.id.btnPhoto);
+        takePictureLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        Bundle extras = result.getData().getExtras();
+                        Bitmap imageBitmap = (Bitmap) extras.get("data");
 
-        takePhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onCLick(View v) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(intent, 1);
-                }
+                        String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+                        dataSource.add(new ProgressItem(currentDate, imageBitmap));
+                        // progAdapter.notifyDataSetChanged();
+                    }
+                });
+
+        Button btnCapture = findViewById(R.id.btnPhoto);
+        btnCapture.setOnClickListener(view -> {
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null){
+                takePictureLauncher.launch(takePictureIntent);
             }
-        }); */
+        });
+
     }
 
     public void workoutSuggestion(View v) {
