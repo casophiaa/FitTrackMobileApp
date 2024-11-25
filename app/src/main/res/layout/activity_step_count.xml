@@ -22,8 +22,8 @@
         android:id="@+id/StepTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="160dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="30dp"
         android:text="Steps"
         android:textColor="@color/dark_purple"
         android:textSize="34sp"
@@ -33,11 +33,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/relativeLayout"
+        android:layout_width="214dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:layout_marginLeft="55dp"
-        >
+        android:layout_marginLeft="90dp"
+        android:layout_marginTop="30dp">
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -48,28 +48,132 @@
             android:progressDrawable="@drawable/circular_progress_bar" />
 
         <TextView
-            android:id="@+id/stepsCount"
+            android:id="@+id/totalStepsCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Steps"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:textSize="25dp"
+            android:layout_marginTop="110dp"
+            android:text="Total Steps"
             android:textColor="#673AB7"
-            android:textStyle="bold"
-            />
+            android:textSize="25dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/goalCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="160dp"
             android:text="Goal: 6000"
-            android:layout_marginTop="180dp"
-            android:layout_marginLeft="100dp"
-            android:textSize="20dp"
-            android:textStyle="bold"
             android:textColor="#000000"
-            />
-
+            android:textSize="20dp"
+            android:textStyle="bold" />
     </RelativeLayout>
+
+    <!-- Horizontal layout for step views -->
+    <LinearLayout
+        android:id="@+id/stepInfoRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relativeLayout"
+        android:layout_marginTop="-40dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:padding="16dp">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/previousTimestampTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Previous Time"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/previousTimestampView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginEnd="32dp"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:id="@+id/previousStepsViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Previous Steps"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/previousStepsView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/currentStepsCountTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Steps"
+                android:textSize="14sp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/currentStepsCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/dailyStepsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/stepInfoRow"
+        android:layout_marginTop="20dp"
+        android:clipToPadding="false"
+        android:padding="16dp"
+        android:scrollbars="vertical"
+        android:backgroundTint="#FFFFFF" />
 </RelativeLayout>
