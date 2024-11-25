@@ -7,10 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -34,22 +31,16 @@ public class TrackMyWorkout extends FragmentActivity implements OnMapReadyCallba
         }
 
         ImageButton backButton = findViewById(R.id.back_button);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(TrackMyWorkout.this, Dashboard.class);
-                startActivity(intent);
-                finish();
-            }
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(TrackMyWorkout.this, Dashboard.class);
+            startActivity(intent);
+            finish();
         });
 
         Button startTrackingButton = findViewById(R.id.start_tracking_button);
-        startTrackingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(TrackMyWorkout.this, "Tracking Outdoor Activities", Toast.LENGTH_SHORT).show();
-                startTrackingOutdoorActivities();
-            }
+        startTrackingButton.setOnClickListener(v -> {
+            Intent i = new Intent(TrackMyWorkout.this, StepCount.class);
+            startActivity(i);
         });
     }
 
@@ -63,10 +54,5 @@ public class TrackMyWorkout extends FragmentActivity implements OnMapReadyCallba
         } else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
-    }
-
-    private void startTrackingOutdoorActivities() {
-        // Implement your logic to start tracking outdoor activities
-        // accelerometer logic here
     }
 }

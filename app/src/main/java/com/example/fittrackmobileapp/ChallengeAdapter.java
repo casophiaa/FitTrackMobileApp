@@ -13,13 +13,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import com.bumptech.glide.Glide;
 
 public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.ViewHolder> {
 
-    ArrayList<com.example.fittrackmobileapp.ChallengeData> challengeDataList;
-    Context context;
+    private List<ChallengeData> challengeDataList;
+    private Context context;
 
-    public ChallengeAdapter(ArrayList<com.example.fittrackmobileapp.ChallengeData> challengeDataList, Context context) {
+    public ChallengeAdapter(List<ChallengeData> challengeDataList, Context context) {
         this.challengeDataList = challengeDataList;
         this.context = context;
     }
@@ -27,25 +30,37 @@ public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.challenge_item_list, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.challenge_item_list, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        com.example.fittrackmobileapp.ChallengeData challengeData = challengeDataList.get(position);
-        holder.textDayNum.setText(challengeData.getDayNum());
-        holder.textDayDesc.setText(challengeData.getDayDesc());
-        holder.exerciseMoveImage.setImageResource(challengeData.getExerciseMove());
+        ChallengeData challengeData = challengeDataList.get(position);
+        holder.dayNum.setText(challengeData.getDayNum());
+        holder.dayDesc.setText(challengeData.getDayDesc());
+
+        if (!challengeData.getExerciseMove().isEmpty()) {
+            Glide.with(context)
+                    .load(challengeData.getExerciseMove()) // URL from Firebase
+                    .placeholder(R.drawable.yogaone) // Optional placeholder image
+                    .into(holder.exerciseMove);
+        } else {
+            holder.exerciseMove.setImageResource(R.drawable.yogaone); // Default placeholder
+        }
+
+        // Set click listener on the item
         holder.itemView.setOnClickListener(v -> {
-            Toast.makeText(context, challengeData.getDayNum(), Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(context, ChallengeActivity.class);
-            i.putExtra("image", challengeData.getExerciseMove());
-            i.putExtra("dayNum", challengeData.getDayNum());
-            i.putExtra("dayDesc", challengeData.getDayDesc());
-            i.putExtra("exerciseDets", challengeData.getExerciseDetails());
-            context.startActivity(i);
+            Intent intent = new Intent(context, ChallengeActivity.class);
+            intent.putExtra("DayNum", challengeData.getDayNum());
+            intent.putExtra("DayDesc", challengeData.getDayDesc());
+            intent.putExtra("exerciseMove", challengeData.getExerciseMove());
+
+            // Pass the exercise details
+            ArrayList<ChallengeMoveDetails> exerciseDetails = new ArrayList<>(challengeData.getExerciseDetails());
+            intent.putParcelableArrayListExtra("exerciseDetails", exerciseDetails);
+
+            context.startActivity(intent);
         });
     }
 
@@ -54,16 +69,17 @@ public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.View
         return challengeDataList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView exerciseMoveImage;
-        TextView textDayNum;
-        TextView textDayDesc;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ViewHolder(@NonNull View itemView) {
+        TextView dayNum, dayDesc;
+        ImageView exerciseMove;
+
+        public ViewHolder(View itemView) {
             super(itemView);
-            exerciseMoveImage = itemView.findViewById(R.id.imageview);
-            textDayNum = itemView.findViewById(R.id.dayNum);
-            textDayDesc = itemView.findViewById(R.id.dayDesc);
+            dayNum = itemView.findViewById(R.id.DayNum);
+            dayDesc = itemView.findViewById(R.id.DayDesc);
+            exerciseMove = itemView.findViewById(R.id.imageview);
+
         }
     }
 }

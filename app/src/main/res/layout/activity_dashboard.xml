@@ -170,7 +170,7 @@
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="bottom"
                 android:padding="10dp"
-                android:text="Track My Workout"
+                android:text="Track My Steps"
                 android:textColor="#000000"
                 android:textSize="14sp" />
 

@@ -29,7 +29,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/dayNum"
+                    android:id="@+id/DayNum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -39,7 +39,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/dayDesc"
+                    android:id="@+id/DayDesc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"

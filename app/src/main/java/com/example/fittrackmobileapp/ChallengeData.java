@@ -1,19 +1,25 @@
 package com.example.fittrackmobileapp;
 
-public class ChallengeData {
+import java.util.List;
 
+public class ChallengeData {
     private String dayNum;
     private String dayDesc;
-    private Integer exerciseMove;
-    private String exerciseDetails;
+    private String exerciseMove;
+    private List<ChallengeMoveDetails> exerciseDetails;
 
-    public ChallengeData(String dayNum, String dayDesc, Integer exerciseMove, String exerciseDetails) {
+    // Default constructor required for calls to DataSnapshot.getValue
+    public ChallengeData() {}
+
+    // Parameterized constructor
+    public ChallengeData(String dayNum, String dayDesc, String exerciseMove, List<ChallengeMoveDetails> exerciseDetails) {
         this.dayNum = dayNum;
-        this.dayDesc = dayDesc  ;
+        this.dayDesc = dayDesc;
         this.exerciseMove = exerciseMove;
         this.exerciseDetails = exerciseDetails;
     }
 
+    // Getters and Setters
     public String getDayNum() {
         return dayNum;
     }
@@ -30,20 +36,19 @@ public class ChallengeData {
         this.dayDesc = dayDesc;
     }
 
-    public Integer getExerciseMove() {
+    public String getExerciseMove() {
         return exerciseMove;
     }
 
-    public void setExerciseMove(Integer exerciseMove) {
+    public void setExerciseMove(String exerciseMove) {
         this.exerciseMove = exerciseMove;
     }
 
-    public String getExerciseDetails() {
-        return this.exerciseDetails;
+    public List<ChallengeMoveDetails> getExerciseDetails() {
+        return exerciseDetails;
     }
 
-    public void setExerciseDetails(String exerciseDetails){
+    public void setExerciseDetails(List<ChallengeMoveDetails> exerciseDetails) {
         this.exerciseDetails = exerciseDetails;
     }
-
 }
