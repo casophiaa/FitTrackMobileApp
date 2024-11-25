@@ -28,10 +28,18 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.PlaceLikelihood;
+import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
+import com.google.android.libraries.places.api.net.PlacesClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class GymsParks extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
@@ -53,6 +61,31 @@ public class GymsParks extends FragmentActivity implements OnMapReadyCallback, L
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        if (mMap != null) {
+            checkLocationPermission();
+            mMap.setMyLocationEnabled(true); // Enable location if permissions are granted
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mMap != null) {
+            checkLocationPermission();
+            mMap.setMyLocationEnabled(false); // Disable location updates to save resources
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Release any map resources if necessary
+    }
+
+
+    @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
 
@@ -64,20 +97,21 @@ public class GymsParks extends FragmentActivity implements OnMapReadyCallback, L
             // Request the current location
             Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
+            double latitude = lastKnownLocation.getLatitude();
+            double longitude = lastKnownLocation.getLongitude();
+
             if (lastKnownLocation != null) {
                 // Move the camera to the last known location
-                double latitude = lastKnownLocation.getLatitude();
-                double longitude = lastKnownLocation.getLongitude();
                 LatLng currentLocation = new LatLng(latitude, longitude);
-
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15));
 
                 // Fetch nearby gyms and parks
-                fetchNearbyPlaces(latitude, longitude);
+                fetchPlacesUsingSDK(latitude, longitude);
             } else {
                 // If no location is available, set a default location
                 LatLng dlsuLocation = new LatLng(14.564622, 120.993999);
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(dlsuLocation, 15));
+                fetchPlacesUsingSDK(latitude, longitude);
             }
         } else {
             // If location permission is not granted, request permission
@@ -94,10 +128,10 @@ public class GymsParks extends FragmentActivity implements OnMapReadyCallback, L
         }
     }
 
-    private void fetchNearbyPlaces(double latitude, double longitude) {
+    /*private void fetchNearbyPlaces(double latitude, double longitude) {
         String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" +
                 "location=" + latitude + "," + longitude +
-                "&radius=1500" +
+                "&radius=2500" +
                 "&type=gym|park" +
                 "&key=AIzaSyAz5VUjgKK3GC2BbZhdsYWSNTsemJsNQrI";
 
@@ -134,7 +168,39 @@ public class GymsParks extends FragmentActivity implements OnMapReadyCallback, L
                 });
 
         queue.add(request);
+    }*/
+
+    private void fetchPlacesUsingSDK(double latitude, double longitude) {
+        if (!Places.isInitialized()) {
+            Places.initialize(getApplicationContext(), "AIzaSyAz5VUjgKK3GC2BbZhdsYWSNTsemJsNQrI");
+        }
+
+        PlacesClient placesClient = Places.createClient(this);
+
+        List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.TYPES);
+
+        FindCurrentPlaceRequest request = FindCurrentPlaceRequest.newInstance(placeFields);
+
+        checkLocationPermission();
+
+        placesClient.findCurrentPlace(request).addOnSuccessListener(response -> {
+            for (PlaceLikelihood likelihood : response.getPlaceLikelihoods()) {
+                Place place = likelihood.getPlace();
+
+                // Filter for gyms and parks
+                if (place.getTypes().contains(Place.Type.GYM) || place.getTypes().contains(Place.Type.PARK)) {
+                    LatLng placeLatLng = place.getLatLng();
+                    if (placeLatLng != null) {
+                        mMap.addMarker(new MarkerOptions().position(placeLatLng).title(place.getName()));
+                    }
+                }
+            }
+        }).addOnFailureListener(exception -> {
+            exception.printStackTrace();
+            // Toast.makeText(this, "Failed to fetch places: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
+        });
     }
+
 
     private void getCurrentLocation() {
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -154,7 +220,7 @@ public class GymsParks extends FragmentActivity implements OnMapReadyCallback, L
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15));
 
         // Fetch nearby places using the current location
-        fetchNearbyPlaces(latitude, longitude);
+        fetchPlacesUsingSDK(latitude, longitude);
     }
 
 }
