@@ -44,6 +44,9 @@
             android:name=".Register"
             android:exported="false" />
         <activity
+            android:name=".RegMoreInfo"
+            android:exported="false" />
+        <activity
             android:name=".ExerciseItem"
             android:exported="false" />
         <activity
