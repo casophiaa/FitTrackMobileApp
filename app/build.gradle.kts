@@ -53,6 +53,9 @@ dependencies {
     implementation("com.google.android.gms:play-services-maps:19.0.0")
     implementation ("com.android.volley:volley:1.2.1")
     implementation ("com.google.android.libraries.places:places:4.1.0")
+    implementation ("com.google.firebase:firebase-auth:22.0.1")
+    implementation ("com.google.firebase:firebase-database:20.3.3")
+
 
 
 
