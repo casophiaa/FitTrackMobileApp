@@ -70,7 +70,7 @@
                 android:layout_marginTop="10dp"
                 android:ems="10"
                 android:inputType="textPassword"
-                android:text="password" />
+                android:hint="password" />
 
             <LinearLayout
                 android:id="@+id/rememberForgotLayout"
