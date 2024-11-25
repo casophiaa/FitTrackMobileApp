@@ -59,7 +59,7 @@ public class Dashboard extends AppCompatActivity {
     }
 
     public void trackMyWorkout(View v) {
-        Intent i = new Intent(this, TrackMyWorkout.class);
+        Intent i = new Intent(this, StepCount.class);
         startActivity(i);
     }
 
