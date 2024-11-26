@@ -1,12 +1,14 @@
 package com.example.fittrackmobileapp;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -56,8 +58,8 @@ public class GymsParks extends FragmentActivity implements OnMapReadyCallback, L
             mapFragment.getMapAsync(this);
         }
 
-        checkLocationPermission();
-        getCurrentLocation();
+       // checkLocationPermission();
+       // getCurrentLocation();
     }
 
     @Override
@@ -88,6 +90,8 @@ public class GymsParks extends FragmentActivity implements OnMapReadyCallback, L
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
 
         // Check for location permission
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -97,21 +101,20 @@ public class GymsParks extends FragmentActivity implements OnMapReadyCallback, L
             // Request the current location
             Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-            double latitude = lastKnownLocation.getLatitude();
-            double longitude = lastKnownLocation.getLongitude();
-
             if (lastKnownLocation != null) {
+                double latitude = lastKnownLocation.getLatitude();
+                double longitude = lastKnownLocation.getLongitude();
+
                 // Move the camera to the last known location
                 LatLng currentLocation = new LatLng(latitude, longitude);
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15));
-
                 // Fetch nearby gyms and parks
                 fetchPlacesUsingSDK(latitude, longitude);
             } else {
                 // If no location is available, set a default location
                 LatLng dlsuLocation = new LatLng(14.564622, 120.993999);
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(dlsuLocation, 15));
-                fetchPlacesUsingSDK(latitude, longitude);
+                fetchPlacesUsingSDK(dlsuLocation.latitude, dlsuLocation.longitude);
             }
         } else {
             // If location permission is not granted, request permission
@@ -170,7 +173,7 @@ public class GymsParks extends FragmentActivity implements OnMapReadyCallback, L
         queue.add(request);
     }*/
 
-    private void fetchPlacesUsingSDK(double latitude, double longitude) {
+    /*private void fetchPlacesUsingSDK(double latitude, double longitude) {
         if (!Places.isInitialized()) {
             Places.initialize(getApplicationContext(), "AIzaSyAz5VUjgKK3GC2BbZhdsYWSNTsemJsNQrI");
         }
@@ -188,10 +191,43 @@ public class GymsParks extends FragmentActivity implements OnMapReadyCallback, L
                 Place place = likelihood.getPlace();
 
                 // Filter for gyms and parks
-                if (place.getTypes().contains(Place.Type.GYM) || place.getTypes().contains(Place.Type.PARK)) {
+                if (place.getTypes().contains(Place.Type.GYM) ){ //|| place.getTypes().contains(Place.Type.PARK)) {
                     LatLng placeLatLng = place.getLatLng();
                     if (placeLatLng != null) {
                         mMap.addMarker(new MarkerOptions().position(placeLatLng).title(place.getName()));
+                    }
+                }
+            }
+        }).addOnFailureListener(exception -> {
+            exception.printStackTrace();
+            // Toast.makeText(this, "Failed to fetch places: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
+        });
+    }*/
+
+    private void fetchPlacesUsingSDK(double latitude, double longitude) {
+        if (!Places.isInitialized()) {
+            Places.initialize(getApplicationContext(), "AIzaSyAz5VUjgKK3GC2BbZhdsYWSNTsemJsNQrI");
+        }
+        PlacesClient placesClient = Places.createClient(this);
+
+        List<Place.Field> placeFields = Arrays.asList(Place.Field.DISPLAY_NAME, Place.Field.LOCATION, Place.Field.TYPES);
+        FindCurrentPlaceRequest request = FindCurrentPlaceRequest.newInstance(placeFields);
+
+        checkLocationPermission();
+
+        placesClient.findCurrentPlace(request).addOnSuccessListener(response -> {
+            for (PlaceLikelihood likelihood : response.getPlaceLikelihoods()) {
+                Place place = likelihood.getPlace();
+
+                // Log the types to debug
+                Log.d("PlaceTypes", "Place name: " + place.getDisplayName() + " Types: " + place.getPlaceTypes());
+
+                // Filter for gyms & parks
+                if (place.getPlaceTypes().contains("gym") || place.getPlaceTypes().contains("park")) {
+                    LatLng placeLatLng = place.getLocation();
+                    if (placeLatLng != null) {
+                     //   Log.d("PlaceTypes", "Place name: " + place.getDisplayName() + " Types: " + place.getPlaceTypes());
+                        mMap.addMarker(new MarkerOptions().position(placeLatLng).title(place.getDisplayName()));
                     }
                 }
             }
