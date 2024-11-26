@@ -88,6 +88,7 @@ public class ProgressPage extends AppCompatActivity{
         barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         barChart.getXAxis().setGranularity(1F);
         barChart.getXAxis().setGranularityEnabled(true);
+        barChart.getDescription().setText(".");
 
         // For progress capture
         horizontalRv = findViewById(R.id.horizontalRv);
