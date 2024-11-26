@@ -42,7 +42,7 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.play.services.maps)
     implementation(libs.firebase.database)
-
+    implementation (libs.mpandroidchart)
 
 
 
