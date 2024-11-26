@@ -104,6 +104,7 @@ public class ProgressPage extends AppCompatActivity{
 
         gridLayoutManager = new GridLayoutManager(this, 2);
         horizontalRv.setLayoutManager(gridLayoutManager);
+        horizontalRv.setAdapter(progAdapter);
 
         takePictureLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
@@ -143,19 +144,16 @@ public class ProgressPage extends AppCompatActivity{
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 
-    public void uploadDataToFirebase(String date, Bitmap pic){
+    public void uploadDataToFirebase(String dateCurrent, Bitmap pic){
+        String userID = firebaseAuth.getCurrentUser().getUid();
+
+        if (userID != null) {
+            String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+            databaseReference.child("users").child(userID).child("capture").child(date).setValue(dateCurrent);
+            databaseReference.child("users").child(userID).child("capture").child("bitmap").setValue(pic);
+        }
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference imagesRef = database.getReference("bitmap");
-        DatabaseReference dateRef = database.getReference("title");
-
-        Map<String, Object> captureData = new HashMap<>();
-        
-
         String base64Bitmap = convertBitmap(pic);
-
-        DatabaseReference newImageRef = imagesRef.push();
-        DatabaseReference newDateRef = dateRef.push();
-        newImageRef.setValue(base64Bitmap);
     }
 
     public void workoutSuggestion(View v) {
