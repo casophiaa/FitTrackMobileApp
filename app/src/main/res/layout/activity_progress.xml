@@ -35,7 +35,7 @@
         <LinearLayout
             android:id="@+id/stepsFormat"
             android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_height="80dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -54,7 +54,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Calorie/s"
+                android:textAlignment="center"
+                android:text="Calorie/s burnt"
                 android:textSize="14sp"
                 tools:layout_editor_absoluteX="126dp"
                 tools:layout_editor_absoluteY="34dp" />
