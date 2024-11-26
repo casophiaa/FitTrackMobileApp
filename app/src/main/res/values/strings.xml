@@ -5,5 +5,6 @@
     <string name="c_desc">Get personalized workout suggestions and reminders to stay on track with your fitness journey.</string>
     <string name="d_desc">Discover the best spots around you for a workout using our location-based services.</string>
     <string name="e_desc">Keep a detailed log of your workouts, from weightlifting to cardio, and see how far you\'ve come!</string>
+    <string name="map_id">38d0337f8b5d6ba9</string>
 
 </resources>

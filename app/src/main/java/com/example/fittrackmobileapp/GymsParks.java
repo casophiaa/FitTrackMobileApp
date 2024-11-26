@@ -28,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.Places;
@@ -92,6 +93,10 @@ public class GymsParks extends FragmentActivity implements OnMapReadyCallback, L
         mMap = googleMap;
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
+        mMap.setOnCameraIdleListener(() -> {
+            LatLng center = mMap.getCameraPosition().target;
+            //fetchPlacesUsingSDK(center.latitude, center.longitude);
+        });
 
         // Check for location permission
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -109,12 +114,12 @@ public class GymsParks extends FragmentActivity implements OnMapReadyCallback, L
                 LatLng currentLocation = new LatLng(latitude, longitude);
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15));
                 // Fetch nearby gyms and parks
-                fetchPlacesUsingSDK(latitude, longitude);
+               // fetchPlacesUsingSDK(currentLocation.latitude, currentLocation.longitude);
             } else {
                 // If no location is available, set a default location
                 LatLng dlsuLocation = new LatLng(14.564622, 120.993999);
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(dlsuLocation, 15));
-                fetchPlacesUsingSDK(dlsuLocation.latitude, dlsuLocation.longitude);
+                //fetchPlacesUsingSDK(dlsuLocation.latitude, dlsuLocation.longitude);
             }
         } else {
             // If location permission is not granted, request permission
@@ -204,9 +209,9 @@ public class GymsParks extends FragmentActivity implements OnMapReadyCallback, L
         });
     }*/
 
-    private void fetchPlacesUsingSDK(double latitude, double longitude) {
+   /* private void fetchPlacesUsingSDK(double latitude, double longitude) {
         if (!Places.isInitialized()) {
-            Places.initialize(getApplicationContext(), "AIzaSyAz5VUjgKK3GC2BbZhdsYWSNTsemJsNQrI");
+            Places.initialize(getApplicationContext(), "YOUR_API_KEY");
         }
         PlacesClient placesClient = Places.createClient(this);
 
@@ -216,27 +221,43 @@ public class GymsParks extends FragmentActivity implements OnMapReadyCallback, L
         checkLocationPermission();
 
         placesClient.findCurrentPlace(request).addOnSuccessListener(response -> {
+            mMap.clear(); // Clear old markers to avoid duplication
+
             for (PlaceLikelihood likelihood : response.getPlaceLikelihoods()) {
                 Place place = likelihood.getPlace();
 
-                // Log the types to debug
-                Log.d("PlaceTypes", "Place name: " + place.getDisplayName() + " Types: " + place.getPlaceTypes());
-
-                // Filter for gyms & parks
-                if (place.getPlaceTypes().contains("gym") || place.getPlaceTypes().contains("park")) {
-                    LatLng placeLatLng = place.getLocation();
-                    if (placeLatLng != null) {
-                     //   Log.d("PlaceTypes", "Place name: " + place.getDisplayName() + " Types: " + place.getPlaceTypes());
-                        mMap.addMarker(new MarkerOptions().position(placeLatLng).title(place.getDisplayName()));
+                LatLng placeLatLng = place.getLocation();
+                if (placeLatLng != null) {
+                    // Check place types
+                    if (place.getPlaceTypes().contains("gym")) {
+                        // Add red marker for gyms
+                        mMap.addMarker(new MarkerOptions()
+                                .position(placeLatLng)
+                                .title(place.getDisplayName())
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))); // Gym: Red
+                    } else if (place.getPlaceTypes().contains("park")) {
+                        // Add green marker for parks
+                        mMap.addMarker(new MarkerOptions()
+                                .position(placeLatLng)
+                                .title(place.getDisplayName())
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))); // Park: Green
+                    } else {
+                        // Add small grey marker for other places
+                        mMap.addMarker(new MarkerOptions()
+                                .position(placeLatLng)
+                                .title(place.getDisplayName())
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
+                                .alpha(0.5f) // Make it smaller by reducing opacity (visual trick)
+                                .anchor(0.5f, 0.5f));
                     }
                 }
             }
         }).addOnFailureListener(exception -> {
             exception.printStackTrace();
-            // Toast.makeText(this, "Failed to fetch places: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
         });
     }
 
+*/
 
     private void getCurrentLocation() {
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -256,7 +277,7 @@ public class GymsParks extends FragmentActivity implements OnMapReadyCallback, L
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15));
 
         // Fetch nearby places using the current location
-        fetchPlacesUsingSDK(latitude, longitude);
+        //fetchPlacesUsingSDK(latitude, longitude);
     }
 
 }
