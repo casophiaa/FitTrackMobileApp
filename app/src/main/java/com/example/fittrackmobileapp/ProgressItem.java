@@ -6,6 +6,8 @@ public class ProgressItem {
     private String title;
     private Bitmap bitmap;
 
+    // public Capture() {}
+
     public ProgressItem(String title, Bitmap bitmap) {
         this.title = title;
         this.bitmap = bitmap;
