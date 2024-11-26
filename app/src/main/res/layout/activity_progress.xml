@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
-                android:text="2000"
+                android:text="0"
                 android:textSize="25sp"
                 tools:layout_editor_absoluteX="126dp"
                 tools:layout_editor_absoluteY="34dp" />
@@ -54,8 +54,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Steps"
-                android:textSize="15sp"
+                android:text="Calorie/s"
+                android:textSize="14sp"
                 tools:layout_editor_absoluteX="126dp"
                 tools:layout_editor_absoluteY="34dp" />
 

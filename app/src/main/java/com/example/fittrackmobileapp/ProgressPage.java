@@ -78,7 +78,7 @@ public class ProgressPage extends AppCompatActivity{
         yAxis.setAxisLineColor(Color.BLACK);
         yAxis.setLabelCount(10);
 
-        BarDataSet dataSet = new BarDataSet(entries, "Days");
+        BarDataSet dataSet = new BarDataSet(entries, "Daily Steps");
         dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
 
         BarData barData = new BarData(dataSet);
