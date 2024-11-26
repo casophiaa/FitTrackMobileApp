@@ -72,7 +72,7 @@ public class ProgressPage extends AppCompatActivity{
         entries.add(new BarEntry(6,100f));
 
         YAxis yAxis = barChart.getAxisLeft();
-        yAxis.setAxisMinimum(5000f);
+        yAxis.setAxisMinimum(100f);
         yAxis.setAxisMaximum(5000f);
         yAxis.setAxisLineWidth(2f);
         yAxis.setAxisLineColor(Color.BLACK);
