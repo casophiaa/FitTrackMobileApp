@@ -3,6 +3,8 @@ package com.example.fittrackmobileapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -18,33 +20,44 @@ import java.util.Locale;
 
 public class PlanPage extends AppCompatActivity{
 
-    RecyclerView recyclerView;
-    ExerciseAdapter adapter;
-    List<ExerciseItem> exerciseList;
+    private RecyclerView recyclerView;
+    private PlanAdapter adapter;
+    private ArrayList<PlanItem> planList;
+    private List<PlanItem> allList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan);
-    }
 
-    public void beginnerLevel(View v) {
-        Intent i = new Intent(this, PlanBeginner.class);
-        startActivity(i);
-    }
+        recyclerView = findViewById(R.id.workoutPlansRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-    public void intermediateLevel(View v) {
-        Intent i = new Intent(this, PlanIntermediate.class);
-        startActivity(i);
-    }
+        planList = new ArrayList<>();
+        recyclerView.setAdapter(adapter);
 
-    public void advancedLevel(View v) {
-        Intent i = new Intent(this, PlanAdvanced.class);
-        startActivity(i);
-    }
+        Button beginButton = findViewById(R.id.beginButton);
+        Button intermediateButton = findViewById(R.id.intermediateButton);
+        Button advanceButton = findViewById(R.id.advanceButton);
 
-    public void customExercise(View v) {
+        beginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+            }
+        });
 
+        intermediateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+            }
+        });
+
+        advanceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+            }
+        });
     }
 
     public void workoutSuggestion(View v) {
