@@ -12,14 +12,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="102dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/headerLayout"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerLayout">
 
         <EditText
             android:id="@+id/FirstNameTxt"
@@ -53,8 +54,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPassword"
-            android:hint="password" />
+            android:hint="password"
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/nextBtn"
@@ -71,7 +72,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="148dp"
         android:layout_marginBottom="10dp"
         android:orientation="vertical"
@@ -101,52 +102,17 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="65dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="65dp"
-        android:layout_marginBottom="55dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputLayout">
 
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/poppins"
-            android:text="or Register with" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/GoogleRegBtn"
-                android:layout_width="59dp"
-                android:layout_height="57dp"
-                android:layout_gravity="center"
-                android:layout_marginEnd="16dp"
-                app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
-
-            <ImageButton
-                android:id="@+id/FBregBtn"
-                android:layout_width="59dp"
-                android:layout_height="57dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="16dp"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/facebook_logo" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
