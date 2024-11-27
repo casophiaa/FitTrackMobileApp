@@ -38,6 +38,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.ByteArrayOutputStream;
+import java.nio.ByteBuffer;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -180,7 +181,7 @@ public class ProgressPage extends AppCompatActivity{
                 if (task.isSuccessful()) {
                     for (DataSnapshot snapshot : task.getResult().getChildren()) {
                         String date = snapshot.getKey();
-                        String picture = snapshot.child("capturedPic").getValue(String.class);
+                        Bitmap picture = snapshot.child("capturedPic").getValue(Bitmap.class);
                         dataSource.add(new ProgressItem(date, picture));
                     }
                     progAdapter.notifyDataSetChanged();
@@ -191,22 +192,13 @@ public class ProgressPage extends AppCompatActivity{
         }
     }
 
-    // added Bitmap conversion function to read the image easily
-    public String convertBitmap(Bitmap pic){
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        pic.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);  // PNG format
-        byte[] byteArray = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(byteArray, Base64.DEFAULT);
-    }
-
     public void uploadDataToFirebase(Bitmap pic){
         String userID = firebaseAuth.getCurrentUser().getUid();
-        String base64Bitmap = convertBitmap(pic);
         String date = new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault()).format(new Date());
 
         if (userID != null) {
             databaseReference.child("users").child(userID).child("capture").child(date).child("nowDate").setValue(date);
-            databaseReference.child("users").child(userID).child("capture").child(date).child("capturedPic").setValue(base64Bitmap)
+            databaseReference.child("users").child(userID).child("capture").child(date).child("capturedPic").setValue(pic)
                     .addOnSuccessListener(aVoid -> Log.d("Capture", "Pic saved successfully for " + date))
                     .addOnFailureListener(e -> Log.e("Capture", "Failed to save picture", e));
         }
