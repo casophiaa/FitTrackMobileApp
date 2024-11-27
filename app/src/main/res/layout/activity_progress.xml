@@ -129,6 +129,7 @@
         android:id="@+id/btnPhoto"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:layout_marginLeft="50dp"
         android:fontFamily="@font/poppins"
         android:text="+"
         app:layout_constraintBottom_toTopOf="@+id/Pictures"

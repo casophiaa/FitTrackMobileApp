@@ -18,6 +18,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/walkingbkg" />
 
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="43dp"
+        android:layout_height="29dp"
+        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="back"
+        android:scaleType="fitCenter"
+        android:src="@drawable/backbutton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/StepTitle"
         android:layout_width="wrap_content"

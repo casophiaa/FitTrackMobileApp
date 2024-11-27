@@ -3,125 +3,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
     <LinearLayout
         android:id="@+id/textView8"
         android:layout_width="409dp"
-        android:layout_height="100dp"
+        android:layout_height="135dp"
         android:gravity="center"
         android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Workout Plan"
-        android:textSize="25sp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="118dp"
-        tools:layout_editor_absoluteY="34dp" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/easyLevel"
-        android:layout_width="350dp"
-        android:layout_height="105dp"
-        android:orientation="vertical"
-        android:layout_marginTop="30dp"
-        android:background="#3f345f"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
-        android:onClick="beginnerLevel">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Workout Plan"
+            android:textSize="35sp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="118dp"
+            tools:layout_editor_absoluteY="34dp" />
 
         <TextView
-            android:id="@+id/textView10"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:fontFamily="@font/poppins_bold"
-            android:textSize="40sp"
-            android:textColor="#FFFF"
-            android:text="Beginner" />
+            android:fontFamily="@font/poppins"
+            android:text="Start planning your meals, workout, and more!"
+            android:textSize="15sp"
+            android:layout_gravity="center" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/moderateLevel"
-        android:layout_width="350dp"
-        android:layout_height="105dp"
-        android:orientation="vertical"
-        android:layout_marginTop="40dp"
-        android:background="#3f345f"
+        android:id="@+id/textView9"
+        android:layout_width="411dp"
+        android:layout_height="60dp"
         android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/easyLevel"
-        android:onClick="intermediateLevel">
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/textView8">
 
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/beginButton"
+            android:layout_width="109dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:fontFamily="@font/poppins_bold"
-            android:textSize="40sp"
-            android:textColor="#FFFF"
-            android:text="Intermediate" />
+            android:backgroundTint="@color/dark_purple"
+            android:text="Beginner"
+            android:textSize="15sp" />
 
+        <Button
+            android:id="@+id/advanceButton"
+            android:layout_width="113dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Moderate"
+            android:textSize="15sp"
+            android:backgroundTint="@color/dark_purple" />
+
+        <Button
+            android:id="@+id/intermediateButton"
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="@color/dark_purple"
+            android:text="Intermediate"
+            android:textSize="15sp" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/hardLevel"
-        android:layout_width="350dp"
-        android:layout_height="105dp"
-        android:orientation="vertical"
-        android:layout_marginTop="40dp"
-        android:background="#3f345f"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/moderateLevel"
-        android:onClick="advancedLevel">
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:fontFamily="@font/poppins_bold"
-            android:textSize="40sp"
-            android:textColor="#FFFF"
-            android:text="Advanced"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/customExercise"
-        android:layout_width="350dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="60dp"
-        android:background="#3f345f"
+        android:id="@+id/display"
+        android:layout_width="411dp"
+        android:layout_height="514dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hardLevel"
-        android:onClick="customExercise">
+        app:layout_constraintTop_toBottomOf="@+id/textView9">
 
-        <TextView
-            android:id="@+id/textView13"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/workoutPlansRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_bold"
-            android:text="Customize Your Workout!"
-            android:textColor="#FFFF"
-            android:textSize="24sp"
-            android:gravity="center"/>
-
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"/>
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -132,9 +92,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customExercise"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
