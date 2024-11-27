@@ -2,6 +2,7 @@
 ![IMG_4930](https://github.com/user-attachments/assets/9d150f4f-8b03-4684-b07c-bede9ae6232c)
 
 FitTrack Mobile App
+
 Created by: Orencia, Sophia | Salgado, Allyssa |Jacob, Luisa | Medina, Berenice
 
 Description: 
