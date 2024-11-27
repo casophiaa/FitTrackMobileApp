@@ -1,6 +1,7 @@
 package com.example.fittrackmobileapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -8,6 +9,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -82,6 +84,13 @@ public class StepCount extends AppCompatActivity implements SensorEventListener 
 
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         stepSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+
+        ImageButton backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(StepCount.this, Dashboard.class);
+            startActivity(intent);
+            finish();
+        });
     }
 
     private void fetchStepsFromFirebase() {
@@ -113,6 +122,12 @@ public class StepCount extends AppCompatActivity implements SensorEventListener 
         } else {
             mSensorManager.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_NORMAL);
         }
+
+        // Ensure previousTotalSteps is updated correctly when resuming
+        if (previousTotalSteps == 0) {
+            loadData();  // Load from SharedPreferences
+            fetchPreviousStepsFromFirebase();  // Optionally fetch from Firebase as well
+        }
     }
 
     @Override
@@ -127,6 +142,7 @@ public class StepCount extends AppCompatActivity implements SensorEventListener 
             if (previousTotalSteps == 0) {
                 previousTotalSteps = (int) event.values[0];
             }
+
             totalSteps = (int) event.values[0];
             int currentSteps = totalSteps - previousTotalSteps;
 
@@ -135,7 +151,7 @@ public class StepCount extends AppCompatActivity implements SensorEventListener 
             totalStepsView.setText("" + totalSteps);
 
             // Fetch and display previous steps and timestamp from Firebase
-            fetchPreviousStepsFromFirebase(previousStepsView, previousTimestampView);
+            fetchPreviousStepsFromFirebase();
 
             // Save steps to Firebase
             saveStepsToFirebase(totalSteps);
@@ -147,8 +163,7 @@ public class StepCount extends AppCompatActivity implements SensorEventListener 
         }
     }
 
-
-    private void fetchPreviousStepsFromFirebase(TextView previousStepsView, TextView previousTimestampView) {
+    private void fetchPreviousStepsFromFirebase() {
         String userID = mAuth.getCurrentUser().getUid();
 
         if (userID != null) {
@@ -176,8 +191,6 @@ public class StepCount extends AppCompatActivity implements SensorEventListener 
         }
     }
 
-
-
     private void resetSteps() {
         totalStepsView.setOnClickListener(view -> Toast.makeText(StepCount.this, "Long press to reset steps", Toast.LENGTH_SHORT).show());
 
@@ -186,17 +199,27 @@ public class StepCount extends AppCompatActivity implements SensorEventListener 
             totalSteps = 0;
             totalStepsView.setText("0");
             progressBar.setProgress(0);
-            saveData();
+            saveData();  // Save to SharedPreferences and Firebase
             return true;
         });
     }
 
-
     private void saveData() {
-        SharedPreferences sharedPref = getSharedPreferences("myPref", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("key1", previousTotalSteps);
-        editor.apply();
+        String userID = mAuth.getCurrentUser().getUid();
+        if (userID != null) {
+            String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
+            // Save to Firebase
+            mDatabase.child("users").child(userID).child("steps").child(currentDate).child("stepCount").setValue(previousTotalSteps)
+                    .addOnSuccessListener(aVoid -> Log.d("StepCount", "Steps saved successfully for " + currentDate))
+                    .addOnFailureListener(e -> Log.e("StepCount", "Failed to save steps", e));
+
+            // Save to SharedPreferences
+            SharedPreferences sharedPref = getSharedPreferences("myPref", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putInt("key1", previousTotalSteps);
+            editor.apply();
+        }
     }
 
     private void loadData() {
