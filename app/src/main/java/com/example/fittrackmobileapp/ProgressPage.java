@@ -1,6 +1,8 @@
 package com.example.fittrackmobileapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -37,6 +39,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,6 +54,7 @@ public class ProgressPage extends AppCompatActivity{
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private Bitmap imageBitmap;
+    private ArrayList<BarEntry> entries;
     private List<String> xValues = Arrays.asList("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun");
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth;
@@ -67,18 +71,22 @@ public class ProgressPage extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
         // For the weekly steps count
         BarChart barChart = findViewById(R.id.progressSteps);
         barChart.getAxisRight().setDrawLabels(false);
 
-        ArrayList<BarEntry> entries = new ArrayList<>();
-        entries.add(new BarEntry(0,100f));
+        entries = new ArrayList<>();
+        getStepCountFromFirebase();
+        /*entries.add(new BarEntry(0,100f));
         entries.add(new BarEntry(1,100f));
         entries.add(new BarEntry(2,100f));
         entries.add(new BarEntry(3,100f));
         entries.add(new BarEntry(4,100f));
         entries.add(new BarEntry(5,100f));
-        entries.add(new BarEntry(6,100f));
+        entries.add(new BarEntry(6,100f)); */
 
         YAxis yAxis = barChart.getAxisLeft();
         yAxis.setAxisMinimum(100f);
@@ -114,8 +122,8 @@ public class ProgressPage extends AppCompatActivity{
                     Bundle extras = result.getData().getExtras();
                     imageBitmap = (Bitmap) extras.get("data");
                     uploadDataToFirebase(imageBitmap);
+                    getPicFromFirebase();
                 }
-                getPicFromFirebase();
             }
         });
 
@@ -132,6 +140,36 @@ public class ProgressPage extends AppCompatActivity{
             }
         });
 
+    }
+
+    private void getStepCountFromFirebase() {
+        String userID = firebaseAuth.getCurrentUser().getUid();
+        String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        if (userID != null){
+            databaseReference.child("users").child(userID).child("steps").get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            for(DataSnapshot snapshot : task.getResult().getChildren()) {
+                                Integer previousSteps = snapshot.child(currentDate).child("stepCount").getValue(Integer.class);
+                                String dates = snapshot.getKey();
+                                try {
+                                    Date convertDate = format.parse(dates);
+
+                                    long differenceInMillis = convertDate.getTime() - convertDate.getTime();
+                                    float daysSinceReference = differenceInMillis / (1000f * 60 * 60 * 24);
+
+                                    entries.add(new BarEntry(daysSinceReference, previousSteps));
+                                } catch (ParseException e) {
+                                    throw new RuntimeException(e);
+                                }
+
+                            }
+                        }
+                    });
+
+        }
     }
 
     private void getPicFromFirebase() {
@@ -164,12 +202,12 @@ public class ProgressPage extends AppCompatActivity{
     public void uploadDataToFirebase(Bitmap pic){
         String userID = firebaseAuth.getCurrentUser().getUid();
         String base64Bitmap = convertBitmap(pic);
-        String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+        String date = new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault()).format(new Date());
 
         if (userID != null) {
             databaseReference.child("users").child(userID).child("capture").child(date).child("nowDate").setValue(date);
             databaseReference.child("users").child(userID).child("capture").child(date).child("capturedPic").setValue(base64Bitmap)
-                    .addOnSuccessListener(aVoid -> Log.d("Capture", "Steps saved successfully for " + date))
+                    .addOnSuccessListener(aVoid -> Log.d("Capture", "Pic saved successfully for " + date))
                     .addOnFailureListener(e -> Log.e("Capture", "Failed to save picture", e));
         }
     }
