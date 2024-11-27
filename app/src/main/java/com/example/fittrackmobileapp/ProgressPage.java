@@ -146,14 +146,13 @@ public class ProgressPage extends AppCompatActivity{
 
     public void uploadDataToFirebase(String dateCurrent, Bitmap pic){
         String userID = firebaseAuth.getCurrentUser().getUid();
+        String base64Bitmap = convertBitmap(pic);
 
         if (userID != null) {
             String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
             databaseReference.child("users").child(userID).child("capture").child(date).setValue(dateCurrent);
-            databaseReference.child("users").child(userID).child("capture").child("bitmap").setValue(pic);
+            databaseReference.child("users").child(userID).child("capture").child(base64Bitmap).setValue(pic);
         }
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        String base64Bitmap = convertBitmap(pic);
     }
 
     public void workoutSuggestion(View v) {
