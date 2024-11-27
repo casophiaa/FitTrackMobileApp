@@ -4,11 +4,11 @@ import android.graphics.Bitmap;
 
 public class ProgressItem {
     private String title;
-    private Bitmap bitmap;
+    private String bitmap;
 
     // public Capture() {}
 
-    public ProgressItem(String title, Bitmap bitmap) {
+    public ProgressItem(String title, String bitmap) {
         this.title = title;
         this.bitmap = bitmap;
     }
@@ -21,11 +21,11 @@ public class ProgressItem {
         this.title = title;
     }
 
-    public Bitmap getBitmap() {
+    public String getBitmap() {
         return bitmap;
     }
 
-    public void setImage(Bitmap bitmap){
+    public void setImage(String bitmap){
         this.bitmap = bitmap;
     }
 }

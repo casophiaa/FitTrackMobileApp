@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -112,14 +113,9 @@ public class ProgressPage extends AppCompatActivity{
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                     Bundle extras = result.getData().getExtras();
                     imageBitmap = (Bitmap) extras.get("data");
-                    String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-                    dataSource.add(new ProgressItem(currentDate, imageBitmap));
-                    progAdapter = new ProgAdapter(dataSource);
-                    horizontalRv.setAdapter(progAdapter);
-                    progAdapter.notifyDataSetChanged();
-
-                    uploadDataToFirebase(currentDate, imageBitmap);
+                    uploadDataToFirebase(imageBitmap);
                 }
+                getPicFromFirebase();
             }
         });
 
@@ -135,8 +131,29 @@ public class ProgressPage extends AppCompatActivity{
                 }
             }
         });
+
     }
 
+    private void getPicFromFirebase() {
+        String userID = firebaseAuth.getCurrentUser().getUid();
+
+        if (userID != null) {
+            databaseReference.child("users").child(userID).child("capture").get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    for (DataSnapshot snapshot : task.getResult().getChildren()) {
+                        String date = snapshot.getKey();
+                        String picture = snapshot.child("capturedPic").getValue(String.class);
+                        dataSource.add(new ProgressItem(date, picture));
+                    }
+                    progAdapter.notifyDataSetChanged();
+                }else {
+                    Log.e("Capture", "Error fetching Picture", task.getException());
+                }
+            });
+        }
+    }
+
+    // added Bitmap conversion function to read the image easily
     public String convertBitmap(Bitmap pic){
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         pic.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);  // PNG format
@@ -144,14 +161,16 @@ public class ProgressPage extends AppCompatActivity{
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 
-    public void uploadDataToFirebase(String dateCurrent, Bitmap pic){
+    public void uploadDataToFirebase(Bitmap pic){
         String userID = firebaseAuth.getCurrentUser().getUid();
         String base64Bitmap = convertBitmap(pic);
+        String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
 
         if (userID != null) {
-            String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-            databaseReference.child("users").child(userID).child("capture").child(date).setValue(dateCurrent);
-            databaseReference.child("users").child(userID).child("capture").child(base64Bitmap).setValue(pic);
+            databaseReference.child("users").child(userID).child("capture").child(date).child("nowDate").setValue(date);
+            databaseReference.child("users").child(userID).child("capture").child(date).child("capturedPic").setValue(base64Bitmap)
+                    .addOnSuccessListener(aVoid -> Log.d("Capture", "Steps saved successfully for " + date))
+                    .addOnFailureListener(e -> Log.e("Capture", "Failed to save picture", e));
         }
     }
 
