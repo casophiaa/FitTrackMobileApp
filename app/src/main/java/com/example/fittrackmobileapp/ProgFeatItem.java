@@ -1,10 +1,12 @@
 package com.example.fittrackmobileapp;
 
+import android.graphics.drawable.Drawable;
+
 public class ProgFeatItem {
     private String title;
-    private int imageResId;
+    private Drawable imageResId;
 
-    public ProgFeatItem(String title, int imageResId) {
+    public ProgFeatItem(String title, Drawable imageResId) {
         this.title = title;
         this.imageResId = imageResId;
     }
@@ -13,7 +15,7 @@ public class ProgFeatItem {
         return title;
     }
 
-    public int getImageResId() {
+    public Drawable getImageResId() {
         return imageResId;
     }
 }

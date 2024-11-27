@@ -1,6 +1,7 @@
 package com.example.fittrackmobileapp;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,6 +21,7 @@ import java.util.Locale;
 
 public class Dashboard extends AppCompatActivity {
 
+    private Drawable imageCaptured, imageDrawable, imageDrawableTwo, imageDrawableThree;
     RecyclerView horizontalRv;
     ArrayList<ProgFeatItem> dataSource;
     LinearLayoutManager linearLayoutManager;
@@ -43,9 +45,14 @@ public class Dashboard extends AppCompatActivity {
         horizontalRv = findViewById(R.id.horizontalRv);
         String currentDate = new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault()).format(new Date());
         dataSource = new ArrayList<>();
-        dataSource.add(new ProgFeatItem(currentDate, R.drawable.a));
-        dataSource.add(new ProgFeatItem(currentDate, R.drawable.fimmies2));
-        dataSource.add(new ProgFeatItem(currentDate, R.drawable.fimmies1));
+
+        imageDrawable = getResources().getDrawable(R.drawable.a, null);
+        imageDrawableTwo = getResources().getDrawable(R.drawable.fimmies2, null);
+        imageDrawableThree = getResources().getDrawable(R.drawable.fimmies1, null);
+        dataSource.add(new ProgFeatItem(currentDate, imageDrawable));
+        dataSource.add(new ProgFeatItem(currentDate, imageDrawableTwo));
+        dataSource.add(new ProgFeatItem(currentDate, imageDrawableThree));
+
         profilePic = findViewById(R.id.profilePic);
 
 

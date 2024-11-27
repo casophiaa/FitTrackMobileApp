@@ -29,7 +29,7 @@ public class DashAdapter extends RecyclerView.Adapter<DashAdapter.MyHolder> {
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
         ProgFeatItem item = data.get(position);
         holder.tvTitle.setText(item.getTitle());
-        holder.image.setImageResource(item.getImageResId());
+        holder.image.setImageDrawable(item.getImageResId());
     }
 
     @Override

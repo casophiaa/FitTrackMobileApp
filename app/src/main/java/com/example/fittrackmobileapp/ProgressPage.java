@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -53,19 +55,17 @@ import java.util.Map;
 
 public class ProgressPage extends AppCompatActivity{
 
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
-    private Bitmap imageBitmap;
+    private Drawable imageCaptured, imageDrawable, imageDrawableTwo, imageDrawableThree;
     private ArrayList<BarEntry> entries;
     private List<String> xValues = Arrays.asList("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun");
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth;
 
     RecyclerView horizontalRv;
-    ArrayList<ProgressItem> dataSource;
+    ArrayList<ProgFeatItem> dataSource;
     GridLayoutManager gridLayoutManager;
-    ProgAdapter progAdapter;
+    DashAdapter progAdapter;
     ActivityResultLauncher<Intent> takePictureLauncher;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +87,7 @@ public class ProgressPage extends AppCompatActivity{
         entries.add(new BarEntry(3,100f));
         entries.add(new BarEntry(4,100f));
         entries.add(new BarEntry(5,100f));
-        entries.add(new BarEntry(6,100f)); */
+        entries.add(new BarEntry(6,100f));*/
 
         YAxis yAxis = barChart.getAxisLeft();
         yAxis.setAxisMinimum(100f);
@@ -110,9 +110,18 @@ public class ProgressPage extends AppCompatActivity{
 
         // For progress capture
         horizontalRv = findViewById(R.id.horizontalRv);
+        String currentDate = new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault()).format(new Date());
         dataSource = new ArrayList<>();
 
+        imageDrawable = getResources().getDrawable(R.drawable.a, null);
+        imageDrawableTwo = getResources().getDrawable(R.drawable.fimmies2, null);
+        imageDrawableThree = getResources().getDrawable(R.drawable.fimmies1, null);
+        dataSource.add(new ProgFeatItem(currentDate, imageDrawable));
+        dataSource.add(new ProgFeatItem(currentDate, imageDrawableTwo));
+        dataSource.add(new ProgFeatItem(currentDate, imageDrawableThree));
+
         gridLayoutManager = new GridLayoutManager(this, 2);
+        progAdapter = new DashAdapter(dataSource);
         horizontalRv.setLayoutManager(gridLayoutManager);
         horizontalRv.setAdapter(progAdapter);
 
@@ -121,8 +130,9 @@ public class ProgressPage extends AppCompatActivity{
             public void onActivityResult(ActivityResult result) {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                     Bundle extras = result.getData().getExtras();
-                    imageBitmap = (Bitmap) extras.get("data");
-                    uploadDataToFirebase(imageBitmap);
+                    Bitmap imageBitmap = (Bitmap) extras.get("data");
+                    imageCaptured = new BitmapDrawable(getResources(), imageBitmap);
+                    uploadDataToFirebase(imageCaptured);
                     getPicFromFirebase();
                 }
             }
@@ -181,8 +191,8 @@ public class ProgressPage extends AppCompatActivity{
                 if (task.isSuccessful()) {
                     for (DataSnapshot snapshot : task.getResult().getChildren()) {
                         String date = snapshot.getKey();
-                        Bitmap picture = snapshot.child("capturedPic").getValue(Bitmap.class);
-                        dataSource.add(new ProgressItem(date, picture));
+                        Drawable picture = snapshot.child("capturedPic").getValue(Drawable.class);
+                        dataSource.add(new ProgFeatItem(date, picture));
                     }
                     progAdapter.notifyDataSetChanged();
                 }else {
@@ -192,7 +202,7 @@ public class ProgressPage extends AppCompatActivity{
         }
     }
 
-    public void uploadDataToFirebase(Bitmap pic){
+    public void uploadDataToFirebase(Drawable pic){
         String userID = firebaseAuth.getCurrentUser().getUid();
         String date = new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault()).format(new Date());
 
